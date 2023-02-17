@@ -1,10 +1,14 @@
 <script setup>
 import { RouterView } from "vue-router";
-import HeaderComponent from "./components/layout/HeaderComponent.vue";
+import NavbarComponent from "./components/layout/NavbarComponent.vue";
+import LoginComponent from "./components/forms/LoginComponent.vue";
 </script>
 
 <template>
-  <HeaderComponent />
+  <header>
+    <NavbarComponent />
+    <LoginComponent />
+  </header>
 
   <RouterView />
 </template>
