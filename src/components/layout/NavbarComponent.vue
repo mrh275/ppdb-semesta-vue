@@ -27,8 +27,13 @@
         <li class="nav-item">
           <RouterLink class="nav-link" to="/">Kontak</RouterLink>
         </li>
-        <li class="nav-item">
-          <RouterLink class="nav-link" to="/" @click.prevent="showLoginForm"
+        <li class="nav-item" v-if="userStore.userLoggedIn == true">
+          <RouterLink class="nav-link" to="#" @click.prevent="userStore.logout"
+            >Logout</RouterLink
+          >
+        </li>
+        <li class="nav-item" v-else>
+          <RouterLink to="#" class="nav-link" @click.prevent="showLoginForm"
             >Login</RouterLink
           >
         </li>
@@ -53,6 +58,8 @@
 </template>
 
 <script>
+import { mapStores } from "pinia";
+import useUserStore from "@/stores/user";
 export default {
   mounted() {
     let navbar = document.querySelector(".navbar");
@@ -66,6 +73,9 @@ export default {
         navbar.classList.remove("fixed-nav");
       }
     });
+  },
+  computed: {
+    ...mapStores(useUserStore),
   },
   methods: {
     showLoginForm() {
