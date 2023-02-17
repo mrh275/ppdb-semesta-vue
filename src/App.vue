@@ -1,8 +1,27 @@
-<script setup>
+<script>
+// eslint-disable-next-line no-unused-vars
 import { RouterView } from "vue-router";
-import NavbarComponent from "./components/layout/NavbarComponent.vue";
-import LoginComponent from "./components/forms/LoginComponent.vue";
-import FooterComponent from "./components/layout/FooterComponent.vue";
+import { mapWritableState } from "pinia";
+import NavbarComponent from "@/components/layout/NavbarComponent.vue";
+import LoginComponent from "@/components/forms/LoginComponent.vue";
+import FooterComponent from "@/components/layout/FooterComponent.vue";
+import useUserStore from "@/stores/user";
+
+export default {
+  components: {
+    NavbarComponent,
+    LoginComponent,
+    FooterComponent,
+  },
+  computed: {
+    ...mapWritableState(useUserStore, ["userLoggedIn"]),
+  },
+  created() {
+    if (sessionStorage.accessToken) {
+      this.userLoggedIn = true;
+    }
+  },
+};
 </script>
 
 <template>
