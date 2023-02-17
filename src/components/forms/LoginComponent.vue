@@ -1,6 +1,24 @@
 <script>
 export default {
   name: "LoginComponent",
+  data() {
+    return {
+      typeField: "password",
+    };
+  },
+  methods: {
+    closeLoginForm() {
+      document.querySelector("#login-form").classList.add("invisible");
+      document.querySelector("#login-form").classList.add("opacity-0");
+    },
+    showPassword() {
+      if (this.typeField === "password") {
+        this.typeField = "text";
+      } else {
+        this.typeField = "password";
+      }
+    },
+  },
 };
 </script>
 <template>
@@ -29,6 +47,7 @@ export default {
               type="button"
               id="close-login-btn"
               class="close-login-form absolute text-2xl text-zinc-600 cursor-pointer font-bold top-0.5 right-2"
+              @click.prevent="closeLoginForm"
             >
               <i class="fa-solid fa-xmark"></i>
             </button>
@@ -55,15 +74,20 @@ export default {
               >
               <input
                 name="password"
-                type="password"
+                :type="typeField"
                 id="password"
                 class="w-full bg-gray-50 text-gray-800 border focus:ring ring-[#0099ff] rounded outline-none transition duration-100 px-3 py-2"
               />
             </div>
 
-            <div>
-              <input type="checkbox" name="showPassword" id="showPassword" />
-              <label for="showPassword">Show Password</label>
+            <div class="flex items-center">
+              <input
+                type="checkbox"
+                @change="showPassword(event)"
+                name="showPassword"
+                id="showPassword"
+              />
+              <label for="showPassword" class="ml-1">Show Password</label>
             </div>
 
             <button
