@@ -25,7 +25,7 @@ html {
     }
 
     .navbar.fixed-nav {
-        @apply bg-white shadow-md transition-all duration-200 ease-in-out;
+        @apply bg-white fixed shadow-md transition-all duration-200 ease-in-out;
     }
 
     /* Brand */
