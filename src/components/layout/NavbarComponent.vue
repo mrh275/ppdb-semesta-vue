@@ -33,14 +33,18 @@
           >
         </li>
       </ul>
-      <div class="toggle-darkMode" id="toggle-darkMode">
+      <div
+        class="toggle-darkMode"
+        id="toggle-darkMode"
+        @click.prevent="toggleDarkMode"
+      >
         <span class="flex w-4 overflow-x-hidden darkMode-btn">
           <i class="text-white bx bxs-moon"></i>
           <i class="text-yellow-600 bx bxs-sun"></i>
         </span>
       </div>
     </div>
-    <div class="toggle-menu">
+    <div class="toggle-menu" @click.prevent="toggleMenu">
       <span class="burger"></span>
       <span class="burger"></span>
       <span class="burger"></span>
@@ -49,17 +53,31 @@
 </template>
 
 <script>
-import LoginComponent from "../forms/LoginComponent.vue";
 export default {
+  mounted() {
+    let navbar = document.querySelector(".navbar");
+    let offset = 0;
+    window.addEventListener("scroll", function () {
+      console.log(window.pageYOffset);
+      let st = window.pageYOffset;
+      if (st > offset) {
+        navbar.classList.add("fixed-nav");
+      } else {
+        navbar.classList.remove("fixed-nav");
+      }
+    });
+  },
   methods: {
     showLoginForm() {
-      const lastMenu = document.querySelector(".nav-menu").lastElementChild;
-      console.log(lastMenu);
       document.querySelector("#login-form").classList.remove("invisible");
       document.querySelector("#login-form").classList.remove("opacity-0");
     },
-    components: {
-      LoginComponent,
+    toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    },
+    toggleMenu() {
+      document.querySelector(".nav-menu").classList.toggle("show");
+      document.querySelector(".navbar").classList.toggle("show");
     },
   },
 };
