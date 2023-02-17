@@ -1,12 +1,21 @@
 <script>
+import { mapActions } from "pinia";
+import useUserStore from "@/stores/user";
+import Swal from "sweetalert2";
+
 export default {
   name: "LoginComponent",
   data() {
     return {
       typeField: "password",
+      credentials: {
+        username: null,
+        password: null,
+      },
     };
   },
   methods: {
+    ...mapActions(useUserStore, ["login"]),
     closeLoginForm() {
       document.querySelector("#login-form").classList.add("invisible");
       document.querySelector("#login-form").classList.add("opacity-0");
@@ -16,6 +25,16 @@ export default {
         this.typeField = "text";
       } else {
         this.typeField = "password";
+      }
+    },
+    async loginAttempt(credentials) {
+      try {
+        await this.login(credentials);
+      } catch (error) {
+        Swal.fire({
+          title: error.name,
+          text: error.message,
+        });
       }
     },
   },
@@ -63,6 +82,7 @@ export default {
                 name="username"
                 id="username"
                 class="w-full bg-gray-50 text-gray-800 border focus:ring ring-[#0099ff] rounded outline-none transition duration-100 px-3 py-2"
+                v-model="credentials.username"
               />
             </div>
 
@@ -77,6 +97,7 @@ export default {
                 :type="typeField"
                 id="password"
                 class="w-full bg-gray-50 text-gray-800 border focus:ring ring-[#0099ff] rounded outline-none transition duration-100 px-3 py-2"
+                v-model="credentials.password"
               />
             </div>
 
@@ -93,7 +114,7 @@ export default {
             <button
               class="block btn btn-primary"
               type="button"
-              onclick="loginAttempt()"
+              @click="loginAttempt(credentials)"
               id="login-btn-form"
             >
               Log in
