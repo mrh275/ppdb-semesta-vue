@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { defineStore } from "pinia";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -33,20 +34,33 @@ export default defineStore('user', {
                         document.querySelector("#login-form").classList.add("invisible");
                         document.querySelector("#login-form").classList.add("opacity-0");
                         window.location.reload()
-                        // const Toast = Swal.mixin({
-                        //     toast: true,
-                        //     position: 'top-end',
-                        //     showConfirmButton: false,
-                        //     showCloseButton: true,
-                        //     timer: 3000,
-                        //     timerProgressBar: true,
-                        // })
-                        // Toast.fire({
-                        //     icon: 'success',
-                        //     title: response.data.message
-                        // })
                     });
                 });
+        },
+        logout() {
+            Swal.fire({
+                title: 'Logging out...',
+                timer: 1500,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            }).then((dismiss) => {
+                sessionStorage.removeItem('accessToken');
+                this.userLoggedIn = false
+                const toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    showCloseButton: true,
+                    timer: 2000,
+                    timerProgressBar: true
+                })
+
+                toast.fire({
+                    icon: 'success',
+                    title: 'User logged out successfully!'
+                })
+            })
         }
     }
 });
