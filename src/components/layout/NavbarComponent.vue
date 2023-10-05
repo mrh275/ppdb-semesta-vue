@@ -7,19 +7,21 @@
     <div class="menu-wrapper">
       <ul class="nav-menu">
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/">Beranda</RouterLink>
+          <RouterLink class="nav-link" to="/"> Beranda </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/">Daftar</RouterLink>
+          <RouterLink class="nav-link" to="/"> Daftar </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/">Persyaratan</RouterLink>
+          <RouterLink class="nav-link" to="/"> Persyaratan </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/">Kuota dan Jalur</RouterLink>
+          <RouterLink class="nav-link" to="/"> Kuota dan Jalur </RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/">Data Pendaftar</RouterLink>
+          <RouterLink class="nav-link" to="/data-pendaftar">
+            Data Pendaftar
+          </RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink class="nav-link" to="/">FAQ</RouterLink>
@@ -65,7 +67,7 @@ export default {
     let navbar = document.querySelector(".navbar");
     let offset = 0;
     window.addEventListener("scroll", function () {
-      console.log(window.pageYOffset);
+      // console.log(window.pageYOffset);
       let st = window.pageYOffset;
       if (st > offset) {
         navbar.classList.add("fixed-nav");
