@@ -13,14 +13,15 @@
           :rowsPerPageOptions="[5, 10, 20, 50]"
           :globalFilterFields="['nama', 'noreg_ppdb', 'nisn', 'tempat_lahir']"
           dataKey="id"
-          filterDisplay="row"
           stripedRows
+          tableStyle="min-width: 50rem"
         >
           <template #header>
             <div class="flex justify-content-end">
               <span class="p-input-icon-left">
                 <i class="pi pi-search" />
                 <InputText
+                  class="py-2 pl-5 pr-2 border-gray-400 border-1"
                   v-model="filters['global'].value"
                   placeholder="Keyword Search"
                 />
