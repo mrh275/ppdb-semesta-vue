@@ -65,6 +65,7 @@ import { mapStores } from "pinia";
 import useUserStore from "@/stores/user";
 export default {
   mounted() {
+    // Fixed navbar
     let navbar = document.querySelector(".navbar");
     let offset = 0;
     window.addEventListener("scroll", function () {
@@ -76,7 +77,9 @@ export default {
         navbar.classList.remove("fixed-nav");
       }
     });
+    // End Fixed navbar
 
+    // Check pathname url
     if (
       window.location.pathname == "/data-pendaftar" ||
       window.location.pathname == "/register"
@@ -85,6 +88,7 @@ export default {
     } else {
       this.sectionPage = "home";
     }
+    // End Check pathname url
   },
   data() {
     return {
