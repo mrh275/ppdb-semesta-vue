@@ -6,28 +6,29 @@
     </div>
     <div class="menu-wrapper">
       <ul class="nav-menu">
-        <li class="nav-item">
-          <RouterLink class="nav-link" to="/"> Beranda </RouterLink>
+        <li class="nav-item" v-if="sectionPage == 'not-home'">
+          <a class="nav-link" href="/"> Beranda </a>
+        </li>
+        <li class="nav-item" v-else>
+          <a class="nav-link" href="#"> Beranda </a>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/"> Daftar </RouterLink>
+          <a class="nav-link" href="/register"> Daftar </a>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/"> Persyaratan </RouterLink>
+          <a class="nav-link" href="/#terms"> Persyaratan </a>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/"> Kuota dan Jalur </RouterLink>
+          <a class="nav-link" href="/#kuota-jalur"> Kuota dan Jalur </a>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/data-pendaftar">
-            Data Pendaftar
-          </RouterLink>
+          <a class="nav-link" href="/data-pendaftar"> Data Pendaftar </a>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/">FAQ</RouterLink>
+          <a class="nav-link" href="/#faq">FAQ</a>
         </li>
         <li class="nav-item">
-          <RouterLink class="nav-link" to="/">Kontak</RouterLink>
+          <a class="nav-link" href="/contact">Kontak</a>
         </li>
         <li class="nav-item" v-if="userStore.userLoggedIn == true">
           <RouterLink class="nav-link" to="#" @click.prevent="userStore.logout"
@@ -75,6 +76,20 @@ export default {
         navbar.classList.remove("fixed-nav");
       }
     });
+
+    if (
+      window.location.pathname == "/data-pendaftar" ||
+      window.location.pathname == "/register"
+    ) {
+      this.sectionPage = "not-home";
+    } else {
+      this.sectionPage = "home";
+    }
+  },
+  data() {
+    return {
+      sectionPage: "home",
+    };
   },
   computed: {
     ...mapStores(useUserStore),
