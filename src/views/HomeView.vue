@@ -6,7 +6,7 @@ export default {
 };
 </script>
 <template>
-  <div class="wrapper relative pt-20 lg:pt-32">
+  <div class="relative pt-20 wrapper lg:pt-32">
     <!-- {{-- Hero Section --}} -->
     <div class="hero-section">
       <div class="hero-img">
@@ -82,7 +82,7 @@ export default {
       </span>
 
       <div class="terms-btn-wrapper">
-        <a href="{{ url('terms') }}" class="terms-btn btn btn-primary"
+        <a href="/#terms" class="terms-btn btn btn-primary"
           >Baca Persyaratan Pendaftaran</a
         >
       </div>
