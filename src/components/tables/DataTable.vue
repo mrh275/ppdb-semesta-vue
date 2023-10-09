@@ -1,29 +1,46 @@
-<script setup>
+<script>
 import SearchFormTable from "../forms/SearchFormTable.vue";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 
 const searchFilter = ref("");
 
-const props = defineProps({
-  items: {
-    type: Array,
-    required: true,
-  },
-});
-
-const filteredItems = computed(() => {
-  if (searchFilter.value != "") {
-    return props.items.filter(
-      (item) =>
-        item.nama.toLowerCase().includes(searchFilter.value.toLowerCase()) ||
-        item.noreg_ppdb.includes(searchFilter.value)
-    );
-  }
-  return props.items;
-});
-
 const handleSearch = (search) => {
   searchFilter.value = search;
+};
+
+export default {
+  data() {
+    return {
+      filterIcon: "bxs-down-arrow",
+      searchFilter: ref(""),
+    };
+  },
+  components: {
+    SearchFormTable,
+  },
+  props: {
+    items: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    handleSearch,
+  },
+  computed: {
+    filteredItems() {
+      if (searchFilter.value != "") {
+        return this.items.filter(
+          (item) =>
+            item.nama
+              .toLowerCase()
+              .includes(searchFilter.value.toLowerCase()) ||
+            item.noreg_ppdb.includes(searchFilter.value)
+        );
+      }
+      return this.items;
+    },
+  },
 };
 </script>
 
@@ -58,13 +75,38 @@ const handleSearch = (search) => {
       <thead
         class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
       >
-        <tr>
+        <tr class="text-gray-700">
           <th scope="col" class="px-6 py-3">No</th>
-          <th scope="col" class="px-6 py-3">No Pendaftaran</th>
-          <th scope="col" class="px-6 py-3">NISN</th>
-          <th scope="col" class="px-6 py-3">Nama</th>
-          <th scope="col" class="px-6 py-3">Jalur Pendaftaran</th>
-          <th scope="col" class="px-6 py-3">Asal Sekolah</th>
+          <th scope="col" class="px-6 py-3">
+            No Pendaftaran
+            <i
+              class="bx {{ filterIcon }} text-[0.7rem] text-gray-400 hover:text-gray-500"
+            ></i>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            NISN
+            <i
+              class="bx bxs-down-arrow text-[0.7rem] text-gray-400 hover:text-gray-500"
+            ></i>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Nama
+            <i
+              class="bx bxs-down-arrow text-[0.7rem] text-gray-400 hover:text-gray-500"
+            ></i>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Jalur Pendaftaran
+            <i
+              class="bx bxs-down-arrow text-[0.7rem] text-gray-400 hover:text-gray-500"
+            ></i>
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Asal Sekolah
+            <i
+              class="bx bxs-down-arrow text-[0.7rem] text-gray-400 hover:text-gray-500"
+            ></i>
+          </th>
         </tr>
       </thead>
       <tbody>
