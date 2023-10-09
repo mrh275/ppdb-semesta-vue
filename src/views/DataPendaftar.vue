@@ -4,16 +4,22 @@
   >
     <div class="relative px-6 py-8 bg-white shadow-md rounded-xl">
       <h2 class="data-pendaftar-title">Data Pendaftar</h2>
-      <div class="card"></div>
+      <div class="table-wrapper">
+        <DataTable :items="siswa" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import DataTable from "../components/tables/DataTable.vue";
 
 export default {
   name: "DataPendaftar",
+  components: {
+    DataTable,
+  },
   data() {
     return {
       siswa: [],
