@@ -17,32 +17,37 @@
               Jl. Raya Garunggung - Panyingkiran Kec. Rawamerta Kab. Karawang,
               Jawa Barat 41382
             </p>
-            <p><i class="fa-solid fa-phone"></i> -</p>
+            <p><i class="fa-solid fa-phone"></i>&nbsp; -</p>
             <p>
-              <i class="fa-solid fa-globe"></i>
-              <a href="https://sman1rawamerta.sch.id" target="_blank"
+              <i class="fa-solid fa-globe"></i>&nbsp;
+              <a
+                href="https://sman1rawamerta.sch.id"
+                target="_blank"
+                class="border-zinc-800 hover:border-b-2 hover:border-dotted"
                 >https://sman1rawamerta.sch.id</a
               >
             </p>
             <p>
-              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-instagram"></i>&nbsp;
               <a
                 href="https://www.instagram.com/sman1rawamerta/"
                 target="_blank"
+                class="border-zinc-800 hover:border-b-2 hover:border-dotted"
                 >@sman1rawamerta</a
               >
             </p>
             <p>
-              <i class="fa-brands fa-youtube"></i>
+              <i class="fa-brands fa-youtube"></i>&nbsp;
               <a
                 href="https://www.youtube.com/channel/UCvTaB-4bPPasVnUf7QYI3tg"
                 target="_blank"
+                class="border-zinc-800 hover:border-b-2 hover:border-dotted"
                 >SMAN 1 RAWAMERTA</a
               >
             </p>
           </div>
         </div>
-        <hr class="border-b border-b-zinc-300 w-full lg:hidden" />
+        <hr class="w-full border-b border-b-zinc-300 lg:hidden" />
         <div class="footer-middle">
           <h3 class="footer-related-link">Link Terkait</h3>
           <div class="backlink">
