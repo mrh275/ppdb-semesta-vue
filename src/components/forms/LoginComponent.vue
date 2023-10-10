@@ -27,8 +27,11 @@ export default {
         this.typeField = "password";
       }
     },
+
+    // Login attempt
     async loginAttempt(credentials) {
       try {
+        // Attemp to login using login method from user store
         await this.login(credentials);
       } catch (error) {
         Swal.fire({
@@ -114,7 +117,7 @@ export default {
             <button
               class="block btn btn-primary"
               type="button"
-              @click="loginAttempt(credentials)"
+              @click.prevent="loginAttempt(credentials)"
               id="login-btn-form"
             >
               Log in
