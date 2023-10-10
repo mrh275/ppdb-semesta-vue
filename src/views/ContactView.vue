@@ -32,10 +32,12 @@ export default {
     </div>
 
     <div
-      class="flex justify-between px-16 py-12 bg-gray-200 contact-form-wrapper"
+      class="flex justify-between px-16 py-12 bg-gray-200 dark:bg-gray-700 contact-form-wrapper"
     >
       <div class="w-1/2 contact-form">
-        <h3 class="text-2xl font-bold contact-form-title">Contact Form</h3>
+        <h3 class="text-2xl font-bold contact-form-title dark:text-white">
+          Contact Form
+        </h3>
         <form class="pt-4">
           <div class="mb-6">
             <label
@@ -46,7 +48,7 @@ export default {
             <input
               type="text"
               id="name"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Tuliskan nama anda"
               required
             />
@@ -60,7 +62,7 @@ export default {
             <input
               type="email"
               id="email"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="emailanda@email.com"
               required
             />
@@ -74,7 +76,7 @@ export default {
             <textarea
               id="message"
               rows="4"
-              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-500 dark:border-gray-300 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Tuliskan pesan anda disini..."
             ></textarea>
           </div>
