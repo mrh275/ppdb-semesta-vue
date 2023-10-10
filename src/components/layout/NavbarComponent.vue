@@ -82,7 +82,8 @@ export default {
     // Check pathname url
     if (
       window.location.pathname == "/data-pendaftar" ||
-      window.location.pathname == "/register"
+      window.location.pathname == "/register" ||
+      window.location.pathname == "/contact"
     ) {
       this.sectionPage = "not-home";
     } else {
