@@ -45,21 +45,30 @@ export default defineStore('user', {
                     Swal.showLoading();
                 }
             }).then((dismiss) => {
-                sessionStorage.removeItem('accessToken');
-                this.userLoggedIn = false
-                const toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    showCloseButton: true,
-                    timer: 2000,
-                    timerProgressBar: true
-                })
+                axios
+                    .request({
+                        url: "/logout",
+                        method: "POST",
+                        headers: {
+                            'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}`
+                        }
+                    }).then((response) => {
+                        sessionStorage.removeItem('accessToken');
+                        this.userLoggedIn = false
+                        const toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            showCloseButton: true,
+                            timer: 2000,
+                            timerProgressBar: true
+                        })
 
-                toast.fire({
-                    icon: 'success',
-                    title: 'User logged out successfully!'
-                })
+                        toast.fire({
+                            icon: 'success',
+                            title: 'User logged out successfully!'
+                        })
+                    })
             })
         }
     }
