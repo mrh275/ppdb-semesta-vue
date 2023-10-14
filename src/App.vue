@@ -27,12 +27,11 @@ export default {
 <template>
   <header>
     <NavbarComponent />
-    <LoginComponent />
   </header>
 
   <div class="main-wrapper">
     <RouterView />
   </div>
-
   <FooterComponent />
+  <LoginComponent />
 </template>
