@@ -13,7 +13,9 @@
           <a class="nav-link" href="#"> Beranda </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/register"> Daftar </a>
+          <a class="nav-link" href="/register" @click.prevent="checkUser">
+            Daftar
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/#terms"> Persyaratan </a>
@@ -63,6 +65,7 @@
 <script>
 import { mapStores } from "pinia";
 import useUserStore from "@/stores/user";
+import Swal from "sweetalert2";
 export default {
   mounted() {
     // Fixed navbar
@@ -110,6 +113,21 @@ export default {
     toggleMenu() {
       document.querySelector(".nav-menu").classList.toggle("show");
       document.querySelector(".navbar").classList.toggle("show");
+    },
+    checkUser() {
+      if (this.userStore.userLoggedIn) {
+        alert("Berhasil daftar!");
+      } else {
+        Swal.fire({
+          icon: "warning",
+          title: "Oops... <br> Anda belum login!",
+          text: "Silahkan login terlebih dahulu.",
+          confirmButtonText: "Tutup",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+        });
+      }
     },
   },
 };
