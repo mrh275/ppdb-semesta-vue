@@ -116,7 +116,7 @@ export default {
     },
     checkUser() {
       if (this.userStore.userLoggedIn) {
-        alert("Berhasil daftar!");
+        window.location.href = "/register";
       } else {
         Swal.fire({
           icon: "warning",
