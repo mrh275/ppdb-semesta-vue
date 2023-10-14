@@ -67,6 +67,8 @@ export default defineStore('user', {
                         toast.fire({
                             icon: 'success',
                             title: 'User logged out successfully!'
+                        }).then((dismiss) => {
+                            window.location.href = "/"
                         })
                     })
             })
