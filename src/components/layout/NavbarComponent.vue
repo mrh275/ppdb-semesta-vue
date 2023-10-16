@@ -18,28 +18,36 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/#terms"> Persyaratan </a>
+          <a class="nav-link" id="menu-terms" href="/#terms"> Persyaratan </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/#kuota-jalur"> Kuota dan Jalur </a>
+          <a class="nav-link" id="menu-kuota" href="/#kuota-jalur">
+            Kuota dan Jalur
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/data-pendaftar"> Data Pendaftar </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/#faq">FAQ</a>
+          <a class="nav-link" id="menu-faq" href="/#faq">FAQ</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contact">Kontak</a>
+          <a class="nav-link" id="menu-contact" href="/contact">Kontak</a>
         </li>
         <li class="nav-item" v-if="userStore.userLoggedIn == true">
-          <RouterLink class="nav-link" to="#" @click.prevent="userStore.logout"
-            >Logout</RouterLink
+          <a
+            class="nav-link"
+            href="javascript:void(0)"
+            @click.prevent="userStore.logout"
+            >Logout</a
           >
         </li>
         <li class="nav-item" v-else>
-          <RouterLink to="#" class="nav-link" @click.prevent="showLoginForm"
-            >Login</RouterLink
+          <a
+            href="javascript:void(0)"
+            class="nav-link"
+            @click.prevent="showLoginForm"
+            >Login</a
           >
         </li>
       </ul>
