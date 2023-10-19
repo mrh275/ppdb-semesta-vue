@@ -80,7 +80,6 @@ export default {
     let navbar = document.querySelector(".navbar");
     let offset = 0;
     window.addEventListener("scroll", function () {
-      // console.log(window.pageYOffset);
       let st = window.pageYOffset;
       if (st > offset) {
         navbar.classList.add("fixed-nav");
