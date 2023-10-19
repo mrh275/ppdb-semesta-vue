@@ -1,7 +1,25 @@
 <script>
+import Swal from "sweetalert2";
 export default {
   beforeMount() {
     document.title = "Portal | PPDB SMAN 1 Rawamerta";
+  },
+  methods: {
+    checkUser() {
+      if (this.userLoggedIn) {
+        window.location.href = "/register";
+      } else {
+        Swal.fire({
+          icon: "warning",
+          title: "Oops... <br> Anda belum login!",
+          text: "Silahkan login terlebih dahulu.",
+          confirmButtonText: "Tutup",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+        });
+      }
+    },
   },
 };
 </script>
@@ -31,7 +49,11 @@ export default {
             Portal ini dibuat untuk memudahkan calon peserta didik baru untuk
             melakukan pendaftaran pada SMA Negeri 1 Rawamerta.
           </p>
-          <a href="{{ url('/daftar') }}" class="btn btn-primary cta-btn">
+          <a
+            href="/register"
+            @click.prevent="checkUser"
+            class="btn btn-primary cta-btn"
+          >
             Daftar Sekarang!
           </a>
         </div>
