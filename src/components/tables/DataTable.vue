@@ -1,6 +1,7 @@
 <script>
 import SearchFormTable from "../forms/SearchFormTable.vue";
 import { ref } from "vue";
+import axios from "axios";
 
 const searchFilter = ref("");
 
@@ -12,7 +13,12 @@ export default {
   data() {
     return {
       filterIcon: "bxs-down-arrow",
-      searchFilter: ref(""),
+      itemIndex: 1,
+      dataItems: "",
+      currentPage: 1,
+      itemPerPage: 10,
+      displayFilterDropdown: "hidden",
+      itemFilterList: [10, 25, 50, 100],
     };
   },
   components: {
@@ -26,27 +32,83 @@ export default {
   },
   methods: {
     handleSearch,
-  },
-  computed: {
     filteredItems() {
       if (searchFilter.value != "") {
-        return this.items.filter(
+        return (this.dataItems = this.items.filter(
           (item) =>
             item.nama
               .toLowerCase()
               .includes(searchFilter.value.toLowerCase()) ||
             item.noreg_ppdb.includes(searchFilter.value)
-        );
+        ));
+      } else {
+        return (this.dataItems = this.displayData(
+          this.items,
+          this.currentPage
+        ));
       }
-      return this.items;
+      // return (this.dataItems = this.items);
     },
+    displayData(data, page) {
+      const start = (page - 1) * this.itemPerPage;
+      const end = start + this.itemPerPage;
+      const paginatedData = data.slice(start, end);
+
+      return paginatedData;
+    },
+    updateButton() {
+      alert("test");
+      // const prevButton = document.getElementById("prev-button");
+      // const nextButton = document.getElementById("next-button");
+      // if (this.currentPage == 1) {
+      //   prevButton.addAttribute("disabled", "disabled");
+      // } else {
+      //   prevButton.removeAttribute("disabled");
+      // }
+    },
+  },
+  computed: {},
+  beforeMount() {
+    const API_url = "http://127.0.0.1:8000/api/data-pendaftar";
+    axios
+      .request({
+        method: "GET",
+        url: API_url,
+      })
+      .then((response) => {
+        this.dataItems = response.data.data;
+      });
+
+    this.filteredItems();
+  },
+  mounted() {
+    document.title = "Data Pendaftar | PPDB SMAN 1 Rawamerta";
   },
 };
 </script>
 
 <template>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <div class="pb-4 bg-white dark:bg-gray-900">
+  <div class="relative overflow-x-auto">
+    <div
+      class="flex items-center justify-between pb-4 bg-white dark:bg-gray-900"
+    >
+      <div>
+        Show
+        <select
+          name="filterItemShow"
+          id="filterItemShow"
+          class="border border-gray-500 rounded-md dark:border-gray-700 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:outline-none"
+          v-model="itemPerPage"
+          @change="itemShowFilter($event)"
+          :value="itemPerPage"
+        >
+          <!-- <option :value="itemPerPage">{{ itemPerPage }}</option> -->
+          <option v-for="item in itemFilterList" :key="item" :value="item">
+            {{ item }}
+          </option>
+        </select>
+        entries
+      </div>
       <label for="table-search" class="sr-only">Search</label>
       <div class="relative mt-1">
         <div
@@ -112,7 +174,7 @@ export default {
       <tbody>
         <tr
           class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
-          v-for="(item, index) in filteredItems"
+          v-for="(item, index) in filteredItems()"
           :key="item.nisn"
         >
           <th
@@ -148,63 +210,76 @@ export default {
     >
       <span class="text-sm font-normal text-gray-500 dark:text-gray-400"
         >Showing
-        <span class="font-semibold text-gray-900 dark:text-white">1-10</span> of
+        <span class="font-semibold text-gray-900 dark:text-white"
+          >{{ itemIndex }}-10</span
+        >
+        of
         <span class="font-semibold text-gray-900 dark:text-white"
           >1000</span
         ></span
       >
-      <ul class="inline-flex h-8 -space-x-px text-sm">
+      <!-- Pagination -->
+      <ul class="inline-flex h-8 -space-x-px text-sm" id="pagination-list">
         <li>
-          <a
-            href="#"
+          <button
+            type="button"
+            id="prev-button"
             class="flex items-center justify-center h-8 px-3 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >Previous</a
           >
+            Previous
+          </button>
         </li>
         <li>
-          <a
-            href="#"
+          <button
+            type="button"
             class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >1</a
           >
+            1
+          </button>
         </li>
         <li>
-          <a
-            href="#"
+          <button
+            type="button"
             class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >2</a
           >
+            2
+          </button>
         </li>
         <li>
-          <a
-            href="#"
-            aria-current="page"
+          <button
+            type="button"
             class="flex items-center justify-center h-8 px-3 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-            >3</a
           >
+            3
+          </button>
         </li>
         <li>
-          <a
-            href="#"
+          <button
+            type="button"
             class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >4</a
           >
+            4
+          </button>
         </li>
         <li>
-          <a
-            href="#"
+          <button
+            type="button"
             class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >5</a
           >
+            5
+          </button>
         </li>
         <li>
-          <a
-            href="#"
+          <button
+            type="button"
+            id="next-button"
             class="flex items-center justify-center h-8 px-3 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >Next</a
           >
+            Next
+          </button>
         </li>
       </ul>
+      <!-- End of Pagination -->
     </nav>
   </div>
 </template>
