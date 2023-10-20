@@ -1,6 +1,7 @@
 <script>
 import FormBiodata from "@/components/forms/register/FormBiodata.vue";
 import FormOrangTua from "@/components/forms/register/FormOrangTua.vue";
+import FormPeriodik from "@/components/forms/register/FormPeriodik.vue";
 
 export default {
   name: "RegisterView",
@@ -43,6 +44,7 @@ export default {
   components: {
     FormBiodata,
     FormOrangTua,
+    FormPeriodik,
   },
   data() {
     return {
@@ -91,13 +93,23 @@ export default {
               :class="statusDataOrangTua"
               id="data-orang-tua"
             >
-              <span class="progress-count" onclick="jumpToDataOrangTua()"
+              <span
+                class="progress-count"
+                :class="isOrangTuaCompleted"
+                onclick="jumpToDataOrangTua()"
                 ><i class="fa-solid fa-users"></i
               ></span>
               <span class="progress-label">Data Orang Tua</span>
             </li>
-            <li class="step-wizard-item" id="data-periodik">
-              <span class="progress-count" onclick="jumpToDataPeriodik()"
+            <li
+              class="step-wizard-item"
+              :class="statusDataPeriodik"
+              id="data-periodik"
+            >
+              <span
+                class="progress-count"
+                :class="isPeriodikCompleted"
+                onclick="jumpToDataPeriodik()"
                 ><i class="fa-solid fa-clipboard-user"></i
               ></span>
               <span class="progress-label">Data Periodik</span>
@@ -118,6 +130,10 @@ export default {
           <FormOrangTua
             @previousForm="changeStatusBiodata"
             @nextForm="changeStatusOrangTua"
+          />
+          <FormPeriodik
+            @previousForm="changeStatusOrangTua"
+            @nextForm="changeStatusPeriodik"
           />
         </div>
       </div>
