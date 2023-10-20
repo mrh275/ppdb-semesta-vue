@@ -1,6 +1,89 @@
 <script>
+import Swal from "sweetalert2";
+
 export default {
   name: "FormPeriodik",
+  methods: {
+    submitDataPeriodik() {
+      Swal.fire({
+        title: "Apa anda sudah yakin?",
+        text: "Pastikan data yang anda masukkan sudah benar.",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yakin!",
+        cancelButtonText: "Belum",
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire({
+            title: "Sedang menyimpan data...",
+            timer: 2000,
+            showConfirmButton: false,
+            didOpen: () => {
+              Swal.showLoading();
+            },
+          }).then(() => {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              showCloseButton: true,
+              timer: 3000,
+              timerProgressBar: true,
+            });
+
+            Toast.fire({
+              icon: "success",
+              title: "Data periodik berhasil disimpan!",
+            });
+            this.$emit("nextForm", {
+              status: "",
+              isComplete: "completed",
+              isBackWard: "current-item",
+            });
+            document
+              .querySelector(".form-periodik-wrapper")
+              .classList.add("completed");
+            document
+              .querySelector(".form-periodik-wrapper")
+              .classList.remove("show");
+            document;
+            //   .querySelector(".form-kesejahteraan-wrapper")
+            //   .classList.add("show");
+            document
+              .querySelector(".form-wrapper-responsive")
+              .classList.remove("periodik");
+            document;
+            //   .querySelector(".form-wrapper-responsive")
+            //   .classList.add("kesejahteraan");
+            const stepWizardList = document.querySelectorAll(
+              "ul.step-wizard-list li"
+            );
+            stepWizardList.forEach((step) => {
+              step.firstElementChild.style.cursor = "pointer";
+            });
+          });
+        }
+      });
+    },
+    backToDataOrangTua() {
+      this.$emit("previousForm", {
+        status: "current-item",
+        isComplete: "",
+        isBackWard: "",
+      });
+      document
+        .querySelector(".form-orang-tua-wrapper")
+        .classList.remove("completed");
+      document.querySelector(".form-orang-tua-wrapper").classList.add("show");
+      document.querySelector(".form-periodik-wrapper").classList.remove("show");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.add("orang-tua");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("periodik");
+    },
+  },
 };
 </script>
 <template>
@@ -284,7 +367,7 @@ export default {
         <button
           type="button"
           class="btn btn-secondary"
-          onclick="backToDataOrangTua()"
+          @click.prevent="backToDataOrangTua()"
         >
           Kembali
         </button>
@@ -292,7 +375,7 @@ export default {
           class="btn btn-primary"
           type="button"
           id="btn-data-periodik"
-          onclick="dataPeriodikNext()"
+          @click.prevent="submitDataPeriodik()"
         >
           Simpan
         </button>
