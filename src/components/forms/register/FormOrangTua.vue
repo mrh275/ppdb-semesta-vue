@@ -41,14 +41,20 @@ export default {
               isBackWard: "current-item",
             });
             document
-              .querySelector(".form-biodata-wrapper")
+              .querySelector(".form-orang-tua-wrapper")
               .classList.add("completed");
             document
               .querySelector(".form-orang-tua-wrapper")
+              .classList.remove("show");
+            document
+              .querySelector(".form-periodik-wrapper")
               .classList.add("show");
             document
               .querySelector(".form-wrapper-responsive")
-              .classList.add("orang-tua");
+              .classList.remove("orang-tua");
+            document
+              .querySelector(".form-wrapper-responsive")
+              .classList.add("periodik");
           });
         }
       });
