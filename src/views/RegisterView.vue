@@ -51,9 +51,11 @@ export default {
       statusBiodata: "current-item",
       statusDataOrangTua: "",
       statusDataPeriodik: "",
+      statusUploadDocuments: "",
       isBiodataCompleted: "",
       isOrangTuaCompleted: "",
       isPeriodikCompleted: "",
+      isUploadDocumentsCompleted: "",
     };
   },
   methods: {
@@ -66,6 +68,11 @@ export default {
       this.statusDataOrangTua = status;
       this.isOrangTuaCompleted = isComplete;
       this.statusDataPeriodik = isBackWard;
+    },
+    changeStatusPeriodik({ status, isComplete, isBackWard }) {
+      this.statusDataPeriodik = status;
+      this.isPeriodikCompleted = isComplete;
+      this.statusUploadDocuments = isBackWard;
     },
   },
 };
@@ -114,8 +121,15 @@ export default {
               ></span>
               <span class="progress-label">Data Periodik</span>
             </li>
-            <li class="step-wizard-item" id="data-kesejahteraan">
-              <span class="progress-count" onclick="jumpToUploadFiles()"
+            <li
+              class="step-wizard-item"
+              :class="statusUploadDocuments"
+              id="data-kesejahteraan"
+            >
+              <span
+                class="progress-count"
+                :class="isUploadDocumentsCompleted"
+                onclick="jumpToUploadFiles()"
                 ><i class="fa-solid fa-arrow-up-from-bracket"></i
               ></span>
               <span class="progress-label">Upload Dokumen</span>
