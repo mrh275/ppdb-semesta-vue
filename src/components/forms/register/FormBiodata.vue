@@ -35,7 +35,11 @@ export default {
               icon: "success",
               title: "Data berhasil disimpan!",
             });
-            this.$emit("changeStatus", "completed");
+            this.$emit("nextForm", {
+              status: "",
+              isComplete: "completed",
+              isBackWard: "current-item",
+            });
             document
               .querySelector(".form-biodata-wrapper")
               .classList.add("completed");
@@ -223,14 +227,7 @@ export default {
           </div>
         </div>
       </div>
-      <div class="form-btn">
-        <button
-          type="button"
-          class="opacity-0 cursor-default btn btn-secondary"
-          disabled
-        >
-          Kembali
-        </button>
+      <div class="form-btn-biodata">
         <button
           class="btn btn-primary"
           type="button"
