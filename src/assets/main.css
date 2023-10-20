@@ -378,7 +378,7 @@ html {
     }
 
     .form-biodata-wrapper {
-        @apply absolute w-full left-0 top-[24px] px-10 transition-all ease-in-out duration-300;
+        @apply absolute w-full left-0 top-[24px] px-10 pb-6 transition-all ease-in-out duration-300;
     }
 
     .form-biodata {
@@ -540,7 +540,10 @@ html {
     }
 
     .form-btn {
-        @apply flex items-center justify-between pt-6;
+        @apply flex items-center justify-between;
+    }
+    .form-btn-biodata {
+        @apply flex items-center justify-end;
     }
     /* End Form */
 
