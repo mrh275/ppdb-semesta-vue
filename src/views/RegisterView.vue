@@ -1,5 +1,6 @@
 <script>
 import FormBiodata from "@/components/forms/register/FormBiodata.vue";
+import FormOrangTua from "@/components/forms/register/FormOrangTua.vue";
 
 export default {
   name: "RegisterView",
@@ -41,20 +42,28 @@ export default {
   },
   components: {
     FormBiodata,
+    FormOrangTua,
   },
   data() {
     return {
       statusBiodata: "current-item",
-      isBiodataCompleted: "",
       statusDataOrangTua: "",
+      statusDataPeriodik: "",
+      isBiodataCompleted: "",
+      isOrangTuaCompleted: "",
+      isPeriodikCompleted: "",
     };
   },
   methods: {
-    changeStatusBiodata(status) {
-      console.log(status);
-      this.statusBiodata = "";
-      this.isBiodataCompleted = status;
-      this.statusDataOrangTua = "current-item";
+    changeStatusBiodata({ status, isComplete, isBackWard }) {
+      this.statusBiodata = status;
+      this.isBiodataCompleted = isComplete;
+      this.statusDataOrangTua = isBackWard;
+    },
+    changeStatusOrangTua({ status, isComplete, isBackWard }) {
+      this.statusDataOrangTua = status;
+      this.isOrangTuaCompleted = isComplete;
+      this.statusDataPeriodik = isBackWard;
     },
   },
 };
@@ -105,7 +114,11 @@ export default {
       <!-- {{-- End Progress Bar --}} -->
       <div class="form-section">
         <div class="form-wrapper-responsive">
-          <FormBiodata @changeStatus="changeStatusBiodata" />
+          <FormBiodata @nextForm="changeStatusBiodata" />
+          <FormOrangTua
+            @previousForm="changeStatusBiodata"
+            @nextForm="changeStatusOrangTua"
+          />
         </div>
       </div>
     </div>
