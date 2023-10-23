@@ -76,6 +76,10 @@ export default {
       this.isPeriodikCompleted = isComplete;
       this.statusUploadDocuments = isBackWard;
     },
+    registrationStatus({ status, isComplete, isBackWard }) {
+      this.statusUploadDocuments = status;
+      this.isUploadDocumentsCompleted = isComplete;
+    },
   },
 };
 </script>
