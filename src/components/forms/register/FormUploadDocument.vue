@@ -1,9 +1,33 @@
 <script>
 import Swal from "sweetalert2";
+import Dropzone from "dropzone";
+import axios from "axios";
+
+console.log(axios.defaults.baseURL);
+
+Dropzone.autoDiscover = false;
 
 export default {
   name: "FormUploadDocument",
   methods: {
+    ijazahUpload() {
+      Dropzone("#ijazah-upload", {
+        url: "{{ url('upload-files/ijazah') }}",
+        acceptedFiles: ".jpg, .jpeg, .png",
+        maxFilesize: 1,
+        paramName: "ijazahFile",
+        thumbnailWidth: 180,
+        thumbnailHeight: 180,
+        addRemoveLinks: true,
+        dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
+        dictCancelUpload: "",
+        previewTemplate: document.querySelector("div#dropzoneItemTemplate")
+          .innerHTML,
+        dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
+        dictInvalidFileType:
+          "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
+      });
+    },
     submitDocuments() {
       Swal.fire({
         title: "Apa anda sudah yakin?",
@@ -89,22 +113,21 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="ijazah-upload"
             >
-              @csrf
               <input type="hidden" name="noreg_ppdb" />
-              <div class="dz-message">
+              <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
                     <i
                       class="fa-solid fa-cloud-arrow-up text-[2rem] text-[#0099ff]"
                     ></i>
+                    <span class="block text-sm text-zinc-700"
+                      >Klik untuk memilih file</span
+                    >
+                    <span class="block my-1 text-xs text-zinc-600">atau</span>
+                    <span class="block text-sm text-zinc-700"
+                      >Drag and Drop file</span
+                    >
                   </div>
-                  <span class="block text-sm text-zinc-700"
-                    >Klik untuk memilih file</span
-                  >
-                  <span class="block my-1 text-xs text-zinc-600">atau</span>
-                  <span class="block text-sm text-zinc-700"
-                    >Drag and Drop file</span
-                  >
                 </div>
                 <span class="btn-sm btn-primary">Browse files</span>
               </div>
@@ -122,22 +145,21 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="kk-upload"
             >
-              @csrf
               <input type="hidden" name="noreg-ppdb" />
-              <div class="dz-message">
+              <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
                     <i
                       class="fa-solid fa-cloud-arrow-up text-[2rem] text-[#0099ff]"
                     ></i>
+                    <span class="block text-sm text-zinc-700"
+                      >Klik untuk memilih file</span
+                    >
+                    <span class="block my-1 text-xs text-zinc-600">atau</span>
+                    <span class="block text-sm text-zinc-700"
+                      >Drag and Drop file</span
+                    >
                   </div>
-                  <span class="block text-sm text-zinc-700"
-                    >Klik untuk memilih file</span
-                  >
-                  <span class="block my-1 text-xs text-zinc-600">atau</span>
-                  <span class="block text-sm text-zinc-700"
-                    >Drag and Drop file</span
-                  >
                 </div>
                 <span class="btn-sm btn-primary">Browse files</span>
               </div>
@@ -155,22 +177,21 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="akte-upload"
             >
-              @csrf
               <input type="hidden" name="noreg-ppdb" />
-              <div class="dz-message">
+              <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
                     <i
                       class="fa-solid fa-cloud-arrow-up text-[2rem] text-[#0099ff]"
                     ></i>
+                    <span class="block text-sm text-zinc-700"
+                      >Klik untuk memilih file</span
+                    >
+                    <span class="block my-1 text-xs text-zinc-600">atau</span>
+                    <span class="block text-sm text-zinc-700"
+                      >Drag and Drop file</span
+                    >
                   </div>
-                  <span class="block text-sm text-zinc-700"
-                    >Klik untuk memilih file</span
-                  >
-                  <span class="block my-1 text-xs text-zinc-600">atau</span>
-                  <span class="block text-sm text-zinc-700"
-                    >Drag and Drop file</span
-                  >
                 </div>
                 <span class="btn-sm btn-primary">Browse files</span>
               </div>
@@ -188,22 +209,21 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="ktp-upload"
             >
-              @csrf
               <input type="hidden" name="noreg-ppdb" />
-              <div class="dz-message">
+              <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
                     <i
                       class="fa-solid fa-cloud-arrow-up text-[2rem] text-[#0099ff]"
                     ></i>
+                    <span class="block text-sm text-zinc-700"
+                      >Klik untuk memilih file</span
+                    >
+                    <span class="block my-1 text-xs text-zinc-600">atau</span>
+                    <span class="block text-sm text-zinc-700"
+                      >Drag and Drop file</span
+                    >
                   </div>
-                  <span class="block text-sm text-zinc-700"
-                    >Klik untuk memilih file</span
-                  >
-                  <span class="block my-1 text-xs text-zinc-600">atau</span>
-                  <span class="block text-sm text-zinc-700"
-                    >Drag and Drop file</span
-                  >
                 </div>
                 <span class="btn-sm btn-primary">Browse files</span>
               </div>
@@ -223,22 +243,21 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="kip-upload"
             >
-              @csrf
               <input type="hidden" name="noreg-ppdb" />
-              <div class="dz-message">
+              <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
                     <i
                       class="fa-solid fa-cloud-arrow-up text-[2rem] text-[#0099ff]"
                     ></i>
+                    <span class="block text-sm text-zinc-700"
+                      >Klik untuk memilih file</span
+                    >
+                    <span class="block my-1 text-xs text-zinc-600">atau</span>
+                    <span class="block text-sm text-zinc-700"
+                      >Drag and Drop file</span
+                    >
                   </div>
-                  <span class="block text-sm text-zinc-700"
-                    >Klik untuk memilih file</span
-                  >
-                  <span class="block my-1 text-xs text-zinc-600">atau</span>
-                  <span class="block text-sm text-zinc-700"
-                    >Drag and Drop file</span
-                  >
                 </div>
                 <span class="btn-sm btn-primary">Browse files</span>
               </div>
@@ -256,22 +275,21 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="kis-upload"
             >
-              @csrf
               <input type="hidden" name="noreg-ppdb" />
-              <div class="dz-message">
+              <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
                     <i
                       class="fa-solid fa-cloud-arrow-up text-[2rem] text-[#0099ff]"
                     ></i>
+                    <span class="block text-sm text-zinc-700"
+                      >Klik untuk memilih file</span
+                    >
+                    <span class="block my-1 text-xs text-zinc-600">atau</span>
+                    <span class="block text-sm text-zinc-700"
+                      >Drag and Drop file</span
+                    >
                   </div>
-                  <span class="block text-sm text-zinc-700"
-                    >Klik untuk memilih file</span
-                  >
-                  <span class="block my-1 text-xs text-zinc-600">atau</span>
-                  <span class="block text-sm text-zinc-700"
-                    >Drag and Drop file</span
-                  >
                 </div>
                 <span class="btn-sm btn-primary">Browse files</span>
               </div>
@@ -289,22 +307,21 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="kks-upload"
             >
-              @csrf
               <input type="hidden" name="noreg-ppdb" />
-              <div class="dz-message">
+              <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
                     <i
                       class="fa-solid fa-cloud-arrow-up text-[2rem] text-[#0099ff]"
                     ></i>
+                    <span class="block text-sm text-zinc-700"
+                      >Klik untuk memilih file</span
+                    >
+                    <span class="block my-1 text-xs text-zinc-600">atau</span>
+                    <span class="block text-sm text-zinc-700"
+                      >Drag and Drop file</span
+                    >
                   </div>
-                  <span class="block text-sm text-zinc-700"
-                    >Klik untuk memilih file</span
-                  >
-                  <span class="block my-1 text-xs text-zinc-600">atau</span>
-                  <span class="block text-sm text-zinc-700"
-                    >Drag and Drop file</span
-                  >
                 </div>
                 <span class="btn-sm btn-primary">Browse files</span>
               </div>
@@ -322,22 +339,21 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="pkh-upload"
             >
-              @csrf
               <input type="hidden" name="noreg-ppdb" />
-              <div class="dz-message">
+              <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
                     <i
                       class="fa-solid fa-cloud-arrow-up text-[2rem] text-[#0099ff]"
                     ></i>
+                    <span class="block text-sm text-zinc-700"
+                      >Klik untuk memilih file</span
+                    >
+                    <span class="block my-1 text-xs text-zinc-600">atau</span>
+                    <span class="block text-sm text-zinc-700"
+                      >Drag and Drop file</span
+                    >
                   </div>
-                  <span class="block text-sm text-zinc-700"
-                    >Klik untuk memilih file</span
-                  >
-                  <span class="block my-1 text-xs text-zinc-600">atau</span>
-                  <span class="block text-sm text-zinc-700"
-                    >Drag and Drop file</span
-                  >
                 </div>
                 <span class="btn-sm btn-primary">Browse files</span>
               </div>
