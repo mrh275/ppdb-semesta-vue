@@ -76,10 +76,16 @@ export default {
         .classList.remove("orang-tua");
     },
   },
+  props: {
+    isCompleted: {
+      type: String,
+      required: false,
+    },
+  },
 };
 </script>
 <template>
-  <div class="form-orang-tua-wrapper">
+  <div class="form-orang-tua-wrapper" :class="isCompleted">
     <h3 class="form-title form-biodata-title">Formulir Data Orang Tua</h3>
     <form
       action="{{ url('/data-orangtua') }}"

@@ -3,16 +3,21 @@ import Swal from "sweetalert2";
 import Dropzone from "dropzone";
 import axios from "axios";
 
-console.log(axios.defaults.baseURL);
-
 Dropzone.autoDiscover = false;
 
 export default {
   name: "FormUploadDocument",
+  data() {
+    return {
+      dropzoneUrl: axios.defaults.baseURL + "/upload-files/ijazah",
+    };
+  },
   methods: {
     ijazahUpload() {
-      Dropzone("#ijazah-upload", {
-        url: "{{ url('upload-files/ijazah') }}",
+      Dropzone.options.ijazahUpload = {
+        url: this.dropzoneUrl,
+        method: "post",
+        withCredentials: true,
         acceptedFiles: ".jpg, .jpeg, .png",
         maxFilesize: 1,
         paramName: "ijazahFile",
@@ -26,7 +31,8 @@ export default {
         dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
         dictInvalidFileType:
           "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
-      });
+        thumbnailMethod: "contain",
+      };
     },
     submitDocuments() {
       Swal.fire({
@@ -91,11 +97,17 @@ export default {
         .classList.remove("kesejahteraan");
     },
   },
+  props: {
+    isCompleted: {
+      type: String,
+      required: false,
+    },
+  },
 };
 </script>
 
 <template>
-  <div class="form-kesejahteraan-wrapper">
+  <div class="form-kesejahteraan-wrapper" :class="isCompleted">
     <h3 class="form-title form-biodata-title">Upload Dokumen</h3>
 
     <div class="mb-6 form-wrapper form-biodata">

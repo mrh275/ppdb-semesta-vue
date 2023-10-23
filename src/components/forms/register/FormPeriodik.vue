@@ -84,10 +84,16 @@ export default {
         .classList.remove("periodik");
     },
   },
+  props: {
+    isCompleted: {
+      type: String,
+      required: false,
+    },
+  },
 };
 </script>
 <template>
-  <div class="form-periodik-wrapper">
+  <div class="form-periodik-wrapper" :class="isCompleted">
     <h3 class="form-title form-biodata-title">Formulir Data Periodik</h3>
     <form
       action="{{ url('data-periodik') }}"

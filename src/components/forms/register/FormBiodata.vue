@@ -54,11 +54,17 @@ export default {
       });
     },
   },
+  props: {
+    isCompleted: {
+      type: String,
+      required: false,
+    },
+  },
 };
 </script>
 
 <template>
-  <div class="form-biodata-wrapper">
+  <div class="form-biodata-wrapper" :class="isCompleted">
     <h3 class="form-title form-biodata-title">Formulir Data Diri</h3>
     <form action="" method="post" id="biodata-cpd">
       <div class="form-wrapper form-biodata">
