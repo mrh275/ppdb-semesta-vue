@@ -1,6 +1,72 @@
 <script>
+import Swal from "sweetalert2";
+
 export default {
   name: "FormUploadDocument",
+  methods: {
+    submitDocuments() {
+      Swal.fire({
+        title: "Apa anda sudah yakin?",
+        text: "Pastikan data yang anda masukkan sudah benar.",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yakin!",
+        cancelButtonText: "Belum",
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire({
+            title: "Sedang menyimpan data...",
+            timer: 2000,
+            showConfirmButton: false,
+            didOpen: () => {
+              Swal.showLoading();
+            },
+          }).then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Pendaftaran berhasil!",
+              text: "Silahkan lakukan verifikasi pendaftaran pada meja Verifikator.",
+            });
+            this.$emit("finishRegistration", {
+              status: "",
+              isComplete: "completed",
+              isBackWard: "current-item",
+            });
+          });
+        }
+      });
+    },
+    backToDataPeriodik() {
+      this.$emit("previousForm", {
+        status: "current-item",
+        isComplete: "",
+        isBackWard: "",
+      });
+      document
+        .querySelector(".form-periodik-wrapper")
+        .classList.remove("completed");
+      document
+        .querySelector(".form-kesejahteraan-wrapper")
+        .classList.remove("completed");
+      document.querySelector(".form-biodata-wrapper").classList.remove("show");
+      document
+        .querySelector(".form-orang-tua-wrapper")
+        .classList.remove("show");
+      document.querySelector(".form-periodik-wrapper").classList.add("show");
+      document
+        .querySelector(".form-kesejahteraan-wrapper")
+        .classList.remove("show");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("orang-tua");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.add("periodik");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("kesejahteraan");
+    },
+  },
 };
 </script>
 
@@ -284,7 +350,7 @@ export default {
       <button
         type="button"
         class="btn btn-secondary"
-        onclick="backToDataPeriodik()"
+        @click.prevent="backToDataPeriodik()"
       >
         Kembali
       </button>
@@ -292,7 +358,7 @@ export default {
         class="btn btn-primary"
         type="button"
         id="btn-upload-files"
-        onclick="nextUpload()"
+        @click.prevent="submitDocuments()"
       >
         Simpan
       </button>
