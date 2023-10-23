@@ -2,6 +2,7 @@
 import FormBiodata from "@/components/forms/register/FormBiodata.vue";
 import FormOrangTua from "@/components/forms/register/FormOrangTua.vue";
 import FormPeriodik from "@/components/forms/register/FormPeriodik.vue";
+import FormUploadDocument from "@/components/forms/register/FormUploadDocument.vue";
 
 export default {
   name: "RegisterView",
@@ -45,6 +46,7 @@ export default {
     FormBiodata,
     FormOrangTua,
     FormPeriodik,
+    FormUploadDocument,
   },
   data() {
     return {
@@ -148,6 +150,10 @@ export default {
           <FormPeriodik
             @previousForm="changeStatusOrangTua"
             @nextForm="changeStatusPeriodik"
+          />
+          <FormUploadDocument
+            @previousForm="changeStatusPeriodik"
+            @finishRegistration="registrationStatus"
           />
         </div>
       </div>
