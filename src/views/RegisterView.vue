@@ -41,6 +41,10 @@ export default {
         }
       });
     }
+    const stepWizardList = document.querySelectorAll("ul.step-wizard-list li");
+    stepWizardList.forEach((step) => {
+      step.firstElementChild.style.cursor = "pointer";
+    });
   },
   components: {
     FormBiodata,
@@ -80,6 +84,156 @@ export default {
       this.statusUploadDocuments = status;
       this.isUploadDocumentsCompleted = isComplete;
     },
+    jumpToDataDiri() {
+      this.changeStatusBiodata({
+        status: "current-item",
+        isComplete: "",
+        isBackWard: "",
+      });
+      this.changeStatusOrangTua({
+        status: "",
+        isComplete: "",
+        isBackWard: "",
+      });
+      this.changeStatusPeriodik({
+        status: "",
+        isComplete: "",
+        isBackWard: "",
+      });
+      document
+        .querySelector(".form-biodata-wrapper")
+        .classList.remove("completed");
+      document
+        .querySelector(".form-orang-tua-wrapper")
+        .classList.remove("completed");
+      document
+        .querySelector(".form-periodik-wrapper")
+        .classList.remove("completed");
+      document
+        .querySelector(".form-kesejahteraan-wrapper")
+        .classList.remove("completed");
+      document
+        .querySelector(".form-orang-tua-wrapper")
+        .classList.remove("show");
+      document.querySelector(".form-periodik-wrapper").classList.remove("show");
+      document
+        .querySelector(".form-kesejahteraan-wrapper")
+        .classList.remove("show");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("orang-tua");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("periodik");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("kesejahteraan");
+    },
+    jumpToDataOrangTua() {
+      this.changeStatusBiodata({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      this.changeStatusOrangTua({
+        status: "current-item",
+        isComplete: "show",
+        isBackWard: "",
+      });
+      this.changeStatusPeriodik({
+        status: "",
+        isComplete: "",
+        isBackWard: "",
+      });
+      document.querySelector(".form-orang-tua-wrapper").classList.add("show");
+      document.querySelector(".form-biodata-wrapper").classList.remove("show");
+      document.querySelector(".form-periodik-wrapper").classList.remove("show");
+      document
+        .querySelector(".form-kesejahteraan-wrapper")
+        .classList.remove("show");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.add("orang-tua");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("periodik");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("kesejahteraan");
+    },
+    jumpToDataPeriodik() {
+      this.changeStatusBiodata({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      this.changeStatusOrangTua({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      this.changeStatusPeriodik({
+        status: "current-item",
+        isComplete: "show",
+        isBackWard: "",
+      });
+      document.querySelector(".form-biodata-wrapper").classList.remove("show");
+      document
+        .querySelector(".form-orang-tua-wrapper")
+        .classList.remove("show");
+      document.querySelector(".form-periodik-wrapper").classList.add("show");
+      document
+        .querySelector(".form-kesejahteraan-wrapper")
+        .classList.remove("show");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("orang-tua");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.add("periodik");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("kesejahteraan");
+    },
+    jumpToUploadFiles() {
+      this.changeStatusBiodata({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      this.changeStatusOrangTua({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      this.changeStatusPeriodik({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      this.registrationStatus({
+        status: "current-item",
+        isComplete: "show",
+        isBackWard: "",
+      });
+      document.querySelector(".form-biodata-wrapper").classList.remove("show");
+      document
+        .querySelector(".form-orang-tua-wrapper")
+        .classList.remove("show");
+      document.querySelector(".form-periodik-wrapper").classList.remove("show");
+      document
+        .querySelector(".form-kesejahteraan-wrapper")
+        .classList.add("show");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("orang-tua");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("periodik");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.add("kesejahteraan");
+    },
   },
 };
 </script>
@@ -96,7 +250,7 @@ export default {
               <span
                 class="progress-count"
                 :class="isBiodataCompleted"
-                onclick="jumpToDataDiri()"
+                @click.prevent="jumpToDataDiri()"
                 ><i class="fa-solid fa-user"></i
               ></span>
               <span class="progress-label">Data Diri</span>
@@ -109,7 +263,7 @@ export default {
               <span
                 class="progress-count"
                 :class="isOrangTuaCompleted"
-                onclick="jumpToDataOrangTua()"
+                @click.prevent="jumpToDataOrangTua()"
                 ><i class="fa-solid fa-users"></i
               ></span>
               <span class="progress-label">Data Orang Tua</span>
@@ -122,7 +276,7 @@ export default {
               <span
                 class="progress-count"
                 :class="isPeriodikCompleted"
-                onclick="jumpToDataPeriodik()"
+                @click.prevent="jumpToDataPeriodik()"
                 ><i class="fa-solid fa-clipboard-user"></i
               ></span>
               <span class="progress-label">Data Periodik</span>
@@ -135,7 +289,7 @@ export default {
               <span
                 class="progress-count"
                 :class="isUploadDocumentsCompleted"
-                onclick="jumpToUploadFiles()"
+                @click.prevent="jumpToUploadFiles()"
                 ><i class="fa-solid fa-arrow-up-from-bracket"></i
               ></span>
               <span class="progress-label">Upload Dokumen</span>
@@ -146,18 +300,24 @@ export default {
       <!-- {{-- End Progress Bar --}} -->
       <div class="form-section">
         <div class="form-wrapper-responsive">
-          <FormBiodata @nextForm="changeStatusBiodata" />
+          <FormBiodata
+            @nextForm="changeStatusBiodata"
+            :isCompleted="isBiodataCompleted"
+          />
           <FormOrangTua
             @previousForm="changeStatusBiodata"
             @nextForm="changeStatusOrangTua"
+            :isCompleted="isOrangTuaCompleted"
           />
           <FormPeriodik
             @previousForm="changeStatusOrangTua"
             @nextForm="changeStatusPeriodik"
+            :isCompleted="isPeriodikCompleted"
           />
           <FormUploadDocument
             @previousForm="changeStatusPeriodik"
             @finishRegistration="registrationStatus"
+            :isCompleted="isUploadDocumentsCompleted"
           />
         </div>
       </div>
