@@ -46,15 +46,15 @@ export default {
             document
               .querySelector(".form-periodik-wrapper")
               .classList.remove("show");
-            document;
-            //   .querySelector(".form-kesejahteraan-wrapper")
-            //   .classList.add("show");
+            document
+              .querySelector(".form-kesejahteraan-wrapper")
+              .classList.add("show");
             document
               .querySelector(".form-wrapper-responsive")
               .classList.remove("periodik");
-            document;
-            //   .querySelector(".form-wrapper-responsive")
-            //   .classList.add("kesejahteraan");
+            document
+              .querySelector(".form-wrapper-responsive")
+              .classList.add("kesejahteraan");
             const stepWizardList = document.querySelectorAll(
               "ul.step-wizard-list li"
             );
