@@ -17,6 +17,7 @@ export default {
       previousButton: "",
       nextButton: "",
       pageNumber: [],
+      searchQuery: "",
     };
   },
   components: {
@@ -25,8 +26,8 @@ export default {
   methods: {
     fetchData(url) {
       const API_url = url
-        ? url
-        : `http://127.0.0.1:8000/api/data-pendaftar?page=1`;
+        ? url + `&search=${this.searchQuery}&itemPerPage=${this.itemPerPage}`
+        : `http://127.0.0.1:8000/api/data-pendaftar?page=1&search=${this.searchQuery}&itemPerPage=${this.itemPerPage}`;
       axios
         .request({
           method: "GET",
@@ -46,6 +47,10 @@ export default {
           console.log(error);
         });
     },
+    search(query) {
+      this.searchQuery = query ? query : "";
+      this.fetchData();
+    },
   },
   computed: {},
   beforeMount() {
@@ -64,19 +69,19 @@ export default {
     >
       <div>
         Show
-        <!-- <select
+        <select
           name="filterItemShow"
           id="filterItemShow"
           class="border border-gray-500 rounded-md dark:border-gray-700 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 active:outline-none"
           v-model="itemPerPage"
-          @change="itemShowFilter($event)"
           :value="itemPerPage"
+          @change="fetchData()"
         >
-           <option :value="itemPerPage">{{ itemPerPage }}</option>
+          <option :value="itemPerPage">{{ itemPerPage }}</option>
           <option v-for="item in itemFilterList" :key="item" :value="item">
             {{ item }}
           </option>
-        </select> -->
+        </select>
         entries
       </div>
       <label for="table-search" class="sr-only">Search</label>
@@ -100,7 +105,7 @@ export default {
             />
           </svg>
         </div>
-        <SearchFormTable />
+        <SearchFormTable @search="search($event)" />
       </div>
     </div>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
