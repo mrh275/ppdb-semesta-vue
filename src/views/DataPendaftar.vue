@@ -13,7 +13,7 @@
 
 <script>
 import axios from "axios";
-import DataTable from "../components/tables/DataTable.vue";
+import DataTable from "../components/tables/NewDataTable.vue";
 
 export default {
   name: "DataPendaftar",
