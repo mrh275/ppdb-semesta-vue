@@ -41,7 +41,7 @@ export default {
           this.lastPage = response.data.data.last_page;
           this.currentPage = response.data.data.current_page;
           this.firstPage = parseInt(response.data.data.links[1].label);
-          // console.log(response.data.data.links);
+          // console.log(response.data.data.data);
         })
         .catch((error) => {
           console.log(error);
@@ -149,14 +149,14 @@ export default {
       <tbody>
         <tr
           class="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
-          v-for="item in dataItems.data"
+          v-for="(item, index) in dataItems.data"
           :key="item.nisn"
         >
           <th
             scope="row"
             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
           >
-            {{ item.from }}
+            {{ index + 1 + (dataItems.current_page - 1) * dataItems.per_page }}
           </th>
           <td
             scope="row"
