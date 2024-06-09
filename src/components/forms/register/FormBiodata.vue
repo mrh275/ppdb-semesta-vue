@@ -7,6 +7,7 @@ export default {
   name: "FormBiodata",
   data() {
     return {
+      noRegister: sessionStorage.getItem("noRegister"),
       biodata: {
         nisn: "",
         nik: "",
@@ -30,8 +31,11 @@ export default {
       },
     };
   },
+  beforeMount() {
+    this.getBiodata();
+  },
   methods: {
-    ...mapActions(useRegisterStore, ["storeBiodata"]),
+    ...mapActions(useRegisterStore, ["storeBiodata", "getCurrentBiodata"]),
     promptBiodata() {
       Swal.fire({
         title: "Apa anda sudah yakin?",
@@ -42,44 +46,43 @@ export default {
         cancelButtonText: "Belum",
       }).then((result) => {
         if (result.value) {
-          this.submitBiodata();
-          // .then(() => {
-          //   Swal.fire({
-          //     title: "Sedang menyimpan data...",
-          //     timer: 2000,
-          //     showConfirmButton: false,
-          //     didOpen: () => {
-          //       Swal.showLoading();
-          //     },
-          //   }).then(() => {
-          //     const Toast = Swal.mixin({
-          //       toast: true,
-          //       position: "top-end",
-          //       showConfirmButton: false,
-          //       showCloseButton: true,
-          //       timer: 3000,
-          //       timerProgressBar: true,
-          //     });
-          //     Toast.fire({
-          //       icon: "success",
-          //       title: "Data berhasil disimpan!",
-          //     });
-          //     this.$emit("nextForm", {
-          //       status: "",
-          //       isComplete: "completed",
-          //       isBackWard: "current-item",
-          //     });
-          //     document
-          //       .querySelector(".form-biodata-wrapper")
-          //       .classList.add("completed");
-          //     document
-          //       .querySelector(".form-orang-tua-wrapper")
-          //       .classList.add("show");
-          //     document
-          //       .querySelector(".form-wrapper-responsive")
-          //       .classList.add("orang-tua");
-          //   });
-          // });
+          this.submitBiodata().then(() => {
+            Swal.fire({
+              title: "Sedang menyimpan data...",
+              timer: 2000,
+              showConfirmButton: false,
+              didOpen: () => {
+                Swal.showLoading();
+              },
+            }).then(() => {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                showCloseButton: true,
+                timer: 3000,
+                timerProgressBar: true,
+              });
+              Toast.fire({
+                icon: "success",
+                title: "Data berhasil disimpan!",
+              });
+              this.$emit("nextForm", {
+                status: "",
+                isComplete: "completed",
+                isBackWard: "current-item",
+              });
+              document
+                .querySelector(".form-biodata-wrapper")
+                .classList.add("completed");
+              document
+                .querySelector(".form-orang-tua-wrapper")
+                .classList.add("show");
+              document
+                .querySelector(".form-wrapper-responsive")
+                .classList.add("orang-tua");
+            });
+          });
         }
       });
     },
@@ -91,6 +94,13 @@ export default {
           title: error.name,
           text: error.message,
         });
+      }
+    },
+    async getBiodata() {
+      try {
+        await this.getCurrentBiodata(this.noRegister);
+      } catch (error) {
+        console.log(error);
       }
     },
   },
