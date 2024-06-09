@@ -15,9 +15,9 @@ export default defineStore('register', {
                         Accept: "application/json",
                         Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
                     },
-                }).then(() => {
-                    sessionStorage.setItem("noRegister", "PPDB-2425-32498");
-                    this.noRegister = "PPDB-2425-32498"
+                }).then((response) => {
+                    sessionStorage.setItem("noRegister", response.data.noreg_ppdb);
+                    this.noRegister = response.data.noreg_ppdb;
                 });
         }
     }
