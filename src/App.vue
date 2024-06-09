@@ -6,6 +6,7 @@ import NavbarComponent from "@/components/layout/NavbarComponent.vue";
 import LoginComponent from "@/components/forms/LoginComponent.vue";
 import FooterComponent from "@/components/layout/FooterComponent.vue";
 import useUserStore from "@/stores/user";
+import useRegisterStore from "@/stores/register";
 
 export default {
   components: {
@@ -15,6 +16,7 @@ export default {
   },
   computed: {
     ...mapWritableState(useUserStore, ["userLoggedIn"]),
+    ...mapWritableState(useRegisterStore, ["currentBiodata"]),
   },
   created() {
     if (sessionStorage.accessToken) {
