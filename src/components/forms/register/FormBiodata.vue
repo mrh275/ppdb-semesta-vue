@@ -1,10 +1,38 @@
 <script>
+import { mapActions } from "pinia";
 import Swal from "sweetalert2";
+import useRegisterStore from "../../../stores/register";
 
 export default {
-  name: "FormBiodate",
+  name: "FormBiodata",
+  data() {
+    return {
+      biodata: {
+        nisn: "",
+        nik: "",
+        nama: "",
+        jenis_kelamin: "",
+        tempat_lahir: "",
+        tanggal_lahir: "",
+        asal_sekolah: "",
+        tahun_lulus: "",
+        kelas: "",
+        jalur_pendaftaran: "",
+        alamat: "",
+        dusun: "",
+        rt: "",
+        rw: "",
+        desa: "",
+        kecamatan: "",
+        kabupaten: "",
+        provinsi: "",
+        kode_pos: "",
+      },
+    };
+  },
   methods: {
-    submitBiodata() {
+    ...mapActions(useRegisterStore, ["storeBiodata"]),
+    promptBiodata() {
       Swal.fire({
         title: "Apa anda sudah yakin?",
         text: "Pastikan data yang anda masukkan sudah benar.",
@@ -14,44 +42,56 @@ export default {
         cancelButtonText: "Belum",
       }).then((result) => {
         if (result.value) {
-          Swal.fire({
-            title: "Sedang menyimpan data...",
-            timer: 2000,
-            showConfirmButton: false,
-            didOpen: () => {
-              Swal.showLoading();
-            },
-          }).then(() => {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              showCloseButton: true,
-              timer: 3000,
-              timerProgressBar: true,
-            });
-
-            Toast.fire({
-              icon: "success",
-              title: "Data berhasil disimpan!",
-            });
-            this.$emit("nextForm", {
-              status: "",
-              isComplete: "completed",
-              isBackWard: "current-item",
-            });
-            document
-              .querySelector(".form-biodata-wrapper")
-              .classList.add("completed");
-            document
-              .querySelector(".form-orang-tua-wrapper")
-              .classList.add("show");
-            document
-              .querySelector(".form-wrapper-responsive")
-              .classList.add("orang-tua");
-          });
+          this.submitBiodata();
+          // .then(() => {
+          //   Swal.fire({
+          //     title: "Sedang menyimpan data...",
+          //     timer: 2000,
+          //     showConfirmButton: false,
+          //     didOpen: () => {
+          //       Swal.showLoading();
+          //     },
+          //   }).then(() => {
+          //     const Toast = Swal.mixin({
+          //       toast: true,
+          //       position: "top-end",
+          //       showConfirmButton: false,
+          //       showCloseButton: true,
+          //       timer: 3000,
+          //       timerProgressBar: true,
+          //     });
+          //     Toast.fire({
+          //       icon: "success",
+          //       title: "Data berhasil disimpan!",
+          //     });
+          //     this.$emit("nextForm", {
+          //       status: "",
+          //       isComplete: "completed",
+          //       isBackWard: "current-item",
+          //     });
+          //     document
+          //       .querySelector(".form-biodata-wrapper")
+          //       .classList.add("completed");
+          //     document
+          //       .querySelector(".form-orang-tua-wrapper")
+          //       .classList.add("show");
+          //     document
+          //       .querySelector(".form-wrapper-responsive")
+          //       .classList.add("orang-tua");
+          //   });
+          // });
         }
       });
+    },
+    async submitBiodata() {
+      try {
+        await this.storeBiodata(this.biodata);
+      } catch (error) {
+        Swal.fire({
+          title: error.name,
+          text: error.message,
+        });
+      }
     },
   },
   props: {
@@ -71,22 +111,45 @@ export default {
         <div class="form-section-left">
           <div class="form-group">
             <label for="nisn">Nomor Induk Siswa Nasional (NISN)</label>
-            <input type="number" class="form-control" id="nisn" name="nisn" />
+            <input
+              type="number"
+              class="form-control"
+              id="nisn"
+              v-model="biodata.nisn"
+              name="nisn"
+            />
             <div class="invalid-feedback">
               <span class="nisn tooltiptext"></span>
             </div>
           </div>
           <div class="form-group">
             <label for="nik">Nomor Induk Kependudukan (NIK)</label>
-            <input type="number" class="form-control" id="nik" name="nik" />
+            <input
+              type="number"
+              class="form-control"
+              v-model="biodata.nik"
+              id="nik"
+              name="nik"
+            />
           </div>
           <div class="form-group">
             <label for="nama">Nama Lengkap</label>
-            <input type="text" class="form-control" id="nama" name="nama" />
+            <input
+              type="text"
+              class="form-control"
+              id="nama"
+              name="nama"
+              v-model="biodata.nama"
+            />
           </div>
           <div class="form-group">
             <label for="jenis_kelamin">Jenis Kelamin</label>
-            <select name="jenis_kelamin" class="form-select" id="jenis_kelamin">
+            <select
+              name="jenis_kelamin"
+              v-model="biodata.jenis_kelamin"
+              class="form-select"
+              id="jenis_kelamin"
+            >
               <option value="">Pilih :</option>
               <option value="L">Laki-laki</option>
               <option value="P">Perempuan</option>
@@ -98,6 +161,7 @@ export default {
               type="text"
               class="form-control"
               id="tempat_lahir"
+              v-model="biodata.tempat_lahir"
               name="tempat_lahir"
             />
           </div>
@@ -107,6 +171,7 @@ export default {
               type="text"
               class="form-control date-input"
               id="tanggal_lahir"
+              v-model="biodata.tanggal_lahir"
               name="tanggal_lahir"
             />
           </div>
@@ -116,12 +181,18 @@ export default {
               type="text"
               class="form-control"
               id="asal_sekolah"
+              v-model="biodata.asal_sekolah"
               name="asal_sekolah"
             />
           </div>
           <div class="form-group">
             <label for="tahun_lulus">Tahun Lulus</label>
-            <select name="tahun_lulus" id="tahun_lulus" class="form-select">
+            <select
+              name="tahun_lulus"
+              v-model="biodata.tahun_lulus"
+              id="tahun_lulus"
+              class="form-select"
+            >
               <option value="">Pilih :</option>
               <option value="3">2022</option>
               <option value="2">2021</option>
@@ -130,7 +201,12 @@ export default {
           </div>
           <div class="form-group">
             <label for="kelas">Kelas</label>
-            <select name="kelas" id="kelas" class="form-select">
+            <select
+              name="kelas"
+              v-model="biodata.kelas"
+              id="kelas"
+              class="form-select"
+            >
               <option value="">Pilih :</option>
               <option value="1">9A</option>
               <option value="2">9B</option>
@@ -152,6 +228,7 @@ export default {
               name="jalur_pendaftaran"
               id="jalur_pendaftaran"
               class="form-select"
+              v-model="biodata.jalur_pendaftaran"
             >
               <option value="">Pilih :</option>
               <option value="1">KETM</option>
@@ -168,6 +245,7 @@ export default {
             <textarea
               name="alamat"
               id="alamat"
+              v-model="biodata.alamat"
               class="form-control"
               cols="30"
               rows="3"
@@ -176,21 +254,45 @@ export default {
           <div class="address-group">
             <div class="form-group dusun">
               <label for="dusun">Dusun</label>
-              <input type="text" class="form-control" id="dusun" name="dusun" />
+              <input
+                type="text"
+                class="form-control"
+                id="dusun"
+                v-model="biodata.dusun"
+                name="dusun"
+              />
             </div>
             <div class="form-group rt">
               <label for="rt">RT</label>
-              <input type="text" class="form-control" id="rt" name="rt" />
+              <input
+                type="text"
+                class="form-control"
+                id="rt"
+                v-model="biodata.rt"
+                name="rt"
+              />
             </div>
             <div class="form-group rw">
               <label for="rw">RW</label>
-              <input type="text" class="form-control" id="rw" name="rw" />
+              <input
+                type="text"
+                class="form-control"
+                id="rw"
+                v-model="biodata.rw"
+                name="rw"
+              />
             </div>
           </div>
           <div class="address-group">
             <div class="form-group desa">
               <label for="desa">Desa</label>
-              <input type="text" class="form-control" id="desa" name="desa" />
+              <input
+                type="text"
+                class="form-control"
+                v-model="biodata.desa"
+                id="desa"
+                name="desa"
+              />
             </div>
             <div class="form-group kecamatan">
               <label for="kecamatan">Kecamatan</label>
@@ -198,6 +300,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="kecamatan"
+                v-model="biodata.kecamatan"
                 name="kecamatan"
               />
             </div>
@@ -209,6 +312,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="kabupaten"
+                v-model="biodata.kabupaten"
                 name="kabupaten"
               />
             </div>
@@ -218,6 +322,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="provinsi"
+                v-model="biodata.provinsi"
                 name="provinsi"
               />
             </div>
@@ -227,6 +332,7 @@ export default {
                 type="text"
                 class="form-control"
                 id="kode_pos"
+                v-model="biodata.kode_pos"
                 name="kode_pos"
               />
             </div>
@@ -238,7 +344,7 @@ export default {
           class="btn btn-primary"
           type="button"
           id="btn-data-diri"
-          @click.prevent="submitBiodata()"
+          @click.prevent="promptBiodata()"
         >
           Simpan
         </button>
