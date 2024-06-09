@@ -3,7 +3,8 @@ import axios from "axios";
 
 export default defineStore('register', {
     state: () => ({
-        noRegister: ""
+        noRegister: "",
+        currentBiodata: null
     }),
     actions: {
         async storeBiodata(values) {
@@ -19,6 +20,22 @@ export default defineStore('register', {
                     sessionStorage.setItem("noRegister", response.data.noreg_ppdb);
                     this.noRegister = response.data.noreg_ppdb;
                 });
+        },
+        async getCurrentBiodata(values) {
+            const url = "/active-pendaftar/" + values;
+            let response = "";
+            await axios
+                .get(url, {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+                    },
+                }).then((response) => {
+                    this.currentBiodata = response.data;
+                    console.log(response.data);
+                    response = response.data;
+                });
+            return response;
         }
     }
 });
