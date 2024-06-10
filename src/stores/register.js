@@ -31,9 +31,7 @@ export default defineStore('register', {
                         Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
                     },
                 }).then((response) => {
-                    this.currentBiodata = response.data;
-                    console.log(response.data);
-                    response = response.data;
+                    this.currentBiodata = response.data.data[0];
                 });
             return response;
         }
