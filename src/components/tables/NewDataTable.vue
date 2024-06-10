@@ -34,9 +34,10 @@ export default {
           url: API_url,
         })
         .then((response) => {
+          console.log(response.data.data);
           this.dataItems = response.data.data;
-          this.previousButton = response.data.data.links[0].url;
-          this.nextButton = response.data.data.links[11].url;
+          this.previousButton = response.data.data.prev_page_url;
+          this.nextButton = response.data.data.next_page_url;
           this.pageNumber = response.data.data.links;
           this.lastPage = response.data.data.last_page;
           this.currentPage = response.data.data.current_page;
