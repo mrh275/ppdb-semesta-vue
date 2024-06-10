@@ -1,23 +1,19 @@
 <script>
-import Swal from "sweetalert2";
+import { mapState } from "pinia";
+import useUserStore from "@/stores/user";
+
 export default {
   beforeMount() {
     document.title = "Portal | PPDB SMAN 1 Rawamerta";
+    this.checkAuth();
+  },
+  computed: {
+    ...mapState(useUserStore, ["userLoggedIn"]),
   },
   methods: {
-    checkUser() {
+    checkAuth() {
       if (this.userLoggedIn) {
-        window.location.href = "/register";
-      } else {
-        Swal.fire({
-          icon: "warning",
-          title: "Oops... <br> Anda belum login!",
-          text: "Silahkan login terlebih dahulu.",
-          confirmButtonText: "Tutup",
-          allowOutsideClick: false,
-          allowEscapeKey: false,
-          allowEnterKey: false,
-        });
+        this.$router.push("/register");
       }
     },
   },
