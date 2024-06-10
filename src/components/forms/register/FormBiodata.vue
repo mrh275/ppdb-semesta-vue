@@ -1,5 +1,5 @@
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import Swal from "sweetalert2";
 import useRegisterStore from "../../../stores/register";
 
@@ -30,6 +30,9 @@ export default {
         kode_pos: "",
       },
     };
+  },
+  computed: {
+    ...mapState(useRegisterStore, ["currentBiodata"]),
   },
   beforeMount() {
     this.getBiodata();
@@ -99,6 +102,7 @@ export default {
     async getBiodata() {
       try {
         await this.getCurrentBiodata(this.noRegister);
+        this.biodata = this.currentBiodata;
       } catch (error) {
         console.log(error);
       }
@@ -204,9 +208,9 @@ export default {
               class="form-select"
             >
               <option value="">Pilih :</option>
-              <option value="3">2022</option>
-              <option value="2">2021</option>
-              <option value="1">2020</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
             </select>
           </div>
           <div class="form-group">
@@ -218,16 +222,16 @@ export default {
               class="form-select"
             >
               <option value="">Pilih :</option>
-              <option value="1">9A</option>
-              <option value="2">9B</option>
-              <option value="3">9C</option>
-              <option value="4">9D</option>
-              <option value="5">9E</option>
-              <option value="6">9F</option>
-              <option value="7">9G</option>
-              <option value="8">9H</option>
-              <option value="9">9I</option>
-              <option value="10">9J</option>
+              <option value="9A">9A</option>
+              <option value="9B">9B</option>
+              <option value="9C">9C</option>
+              <option value="9D">9D</option>
+              <option value="9E">9E</option>
+              <option value="9F">9F</option>
+              <option value="9G">9G</option>
+              <option value="9H">9H</option>
+              <option value="9I">9I</option>
+              <option value="9J">9J</option>
             </select>
           </div>
         </div>
