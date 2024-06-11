@@ -102,7 +102,9 @@ export default {
     async getBiodata() {
       try {
         await this.getCurrentBiodata(this.noRegister);
-        this.biodata = this.currentBiodata;
+        if (this.currentBiodata) {
+          this.biodata = this.currentBiodata;
+        }
       } catch (error) {
         console.log(error);
       }
