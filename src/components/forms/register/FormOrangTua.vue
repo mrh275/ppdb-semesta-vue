@@ -3,6 +3,27 @@ import Swal from "sweetalert2";
 
 export default {
   name: "FormOrangTua",
+  data() {
+    return {
+      dataOrangTua: {
+        noreg_ppdb: sessionStorage.noRegister ? sessionStorage.noRegister : "",
+        nama_ayah: "",
+        tempat_lahir_ayah: "",
+        tanggal_lahir_ayah: "",
+        pendidikan_ayah: "",
+        pekerjaan_ayah: "",
+        penghasilan_ayah: "",
+        alamat_ayah: "",
+        nama_ibu: "",
+        tempat_lahir_ibu: "",
+        tanggal_lahir_ibu: "",
+        pendidikan_ibu: "",
+        pekerjaan_ibu: "",
+        penghasilan_ibu: "",
+        alamat_ibu: "",
+      },
+    };
+  },
   methods: {
     submitDataOrangTua() {
       Swal.fire({
