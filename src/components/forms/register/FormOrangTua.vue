@@ -5,6 +5,7 @@ import useRegisterStore from "@/stores/register";
 
 export default {
   name: "FormOrangTua",
+
   data() {
     return {
       dataOrangTua: {
@@ -28,6 +29,9 @@ export default {
   },
   computed: {
     ...mapState(useRegisterStore, ["currentDataOrangTua"]),
+  },
+  beforeMount() {
+    this.getDataOrangTua();
   },
   methods: {
     ...mapActions(useRegisterStore, ["storeDataOrangTua", "getCurrentBiodata"]),
@@ -110,6 +114,14 @@ export default {
       document
         .querySelector(".form-wrapper-responsive")
         .classList.remove("orang-tua");
+    },
+    async getDataOrangTua() {
+      try {
+        await this.getCurrentBiodata(this.dataOrangTua.noreg_ppdb);
+        this.dataOrangTua = this.currentDataOrangTua;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   props: {
