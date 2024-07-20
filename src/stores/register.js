@@ -7,6 +7,7 @@ export default defineStore('register', {
         currentBiodata: null,
         currentDataOrangTua: null,
         storedDataOrangTua: "",
+        currentStatusRegister: "biodata",
     }),
     actions: {
         async storeBiodata(values) {
@@ -21,6 +22,7 @@ export default defineStore('register', {
                 }).then((response) => {
                     sessionStorage.setItem("noRegister", response.data.noreg_ppdb);
                     this.noRegister = response.data.noreg_ppdb;
+                    this.currentStatusRegister = "orangtua";
                 });
         },
         async storeDataOrangTua(values) {
@@ -36,6 +38,19 @@ export default defineStore('register', {
                     this.storedDataOrangTua = response.data;
                 });
         },
+        async storeDataPeriodik(values) {
+            const url = "/data-periodik"
+            const data = values
+            await axios
+                .post(url, data, {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+                    },
+                }).then((response) => {
+                    this.storedDataPeriodik = response.data;
+                });
+        },
         async getCurrentBiodata(values) {
             const url = "/active-pendaftar/" + values;
             let response = "";
@@ -47,6 +62,7 @@ export default defineStore('register', {
                     },
                 }).then((response) => {
                     this.currentBiodata = response.data.data[0];
+                    this.currentDataOrangTua = response.data.data[0].data_orang_tua[0] ? response.data.data[0].data_orang_tua[0] : null;
                 });
             return response;
         }
