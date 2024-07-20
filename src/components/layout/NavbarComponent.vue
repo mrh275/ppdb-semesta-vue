@@ -1,8 +1,12 @@
 <template>
   <nav class="navbar">
     <div class="brand">
-      <img src="/assets/img/LOGO-XS.png" alt="Logo Sekolah" class="brand-img" />
-      <a href="/" class="brand-title">PPDB SMAN 1 RAWAMERTA</a>
+      <img
+        src="/assets/img/Logo-SMK-Ar-Raihan-XS.png"
+        alt="Logo Sekolah"
+        class="brand-img"
+      />
+      <a href="/" class="brand-title">PPDB SMK AR-RAIHAN CIKAMPEK</a>
     </div>
     <div class="menu-wrapper">
       <ul class="nav-menu">
@@ -21,9 +25,7 @@
           <a class="nav-link" id="menu-terms" href="/#terms"> Persyaratan </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="menu-kuota" href="/#kuota-jalur">
-            Kuota dan Jalur
-          </a>
+          <a class="nav-link" id="menu-kuota" href="/#jurusan"> Jurusan </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/data-pendaftar"> Data Pendaftar </a>

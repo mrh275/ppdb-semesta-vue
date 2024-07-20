@@ -4,7 +4,7 @@ import useUserStore from "@/stores/user";
 
 export default {
   beforeMount() {
-    document.title = "Portal | PPDB SMAN 1 Rawamerta";
+    document.title = "Portal | PPDB SMK Ar-Raihan Cikampek";
     this.checkAuth();
   },
   computed: {
@@ -31,7 +31,7 @@ export default {
           <span class="lg:text-5xl">Selamat Datang!</span><br />
           di Portal
           <span class="ppdb">Penerimaan Peserta Didik Baru (PPDB)</span> <br />
-          SMA Negeri 1 Rawamerta
+          SMK Ar-Raihan Cikampek
         </h1>
       </div>
     </div>
@@ -43,7 +43,7 @@ export default {
         <div class="cta-content">
           <p class="cta-desc">
             Portal ini dibuat untuk memudahkan calon peserta didik baru untuk
-            melakukan pendaftaran pada SMA Negeri 1 Rawamerta.
+            melakukan pendaftaran pada SMK Ar-Raihan Cikampek
           </p>
           <a
             href="/register"
@@ -71,12 +71,12 @@ export default {
             <li>
               Ijazah/Surat Keterangan Lulus/Kartu Peserta Ujian Sekolah <br />
               <strong
-                >*(Untuk CPD yang lulus 2022 jika belum ada ijazah, bisa
+                >*(Untuk CPD yang lulus 2024 jika belum ada ijazah, bisa
                 dilengkapi ketika Ijazah sudah terbit.)</strong
               >
             </li>
             <li>Kartu Keluarga</li>
-            <li>Akta Kelahiran/Surat Kenal Lahir</li>
+            <li>Akta Kelahiran/Surat Keterangan Lahir</li>
             <li>KTP Orang Tua</li>
             <li>Rapor (Semester 1 s/d 5)</li>
             <li>Surat Pertanggung Jawaban Mutlak (SPTJM) Orang Tua</li>
@@ -108,42 +108,38 @@ export default {
     <!-- {{-- End Persyaratan --}} -->
 
     <!-- {{-- Jalur Pendaftaran --}} -->
-    <div class="jalur-section" id="kuota-jalur">
-      <h1 class="jalur-title">Kuota dan Jalur Pendaftaran</h1>
+    <div class="jalur-section" id="jurusan">
+      <h1 class="jalur-title">Program Keahlian dan Gelombang Pendaftaran</h1>
       <div class="jalur-content">
         <div class="kuota-wrapper">
-          <h3 class="kuota-title">A. Kuota Pendaftaran</h3>
+          <h3 class="kuota-title">A. Program Keahlian</h3>
           <ul class="kuota-list">
-            <li>Afirmasi (20%)</li>
-            <li>Perpindahan Orang Tua/Anak Guru (5%)</li>
-            <li>Prestasi (25%)</li>
-            <li>Zonasi (50%)</li>
+            <li>Asisten Keperawatan</li>
+            <li>Teknologi Laboratorium Medik</li>
           </ul>
           <p class="kuota-desc">
             <span class="text-red-500">*</span> Informasi lebih lengkap tentang
-            Kuota Pendaftaran, silahkan klik tombol dibawah ini.
+            Program Keahlian, silahkan klik tombol dibawah ini.
           </p>
           <div class="kuota-btn-wrapper">
             <a href="{{ url('kuota-jalur') }}" class="btn btn-primary btn-kuota"
-              >Kuota Pendaftaran</a
+              >Program Keahlian</a
             >
           </div>
         </div>
         <div class="jalur-wrapper">
-          <h3 class="jalur-list-title">B. Jalur Pendaftaran</h3>
+          <h3 class="jalur-list-title">B. Gelombang Pendaftaran</h3>
           <ul class="jalur-list">
-            <li>Jalur Afirmasi</li>
-            <li>Jalur Perpindahan Orang Tua/Anak Guru</li>
-            <li>Jalur Prestasi</li>
-            <li>Jalur Zonasi</li>
+            <li>Gelombang 1 : Januari s/d Maret 2024</li>
+            <li>Gelumbang 2 : April s/d Juni 2024</li>
           </ul>
           <p class="jalur-desc">
             <span class="text-red-500">*</span> Informasi lebih lengkap tentang
-            Jalur Pendaftaran, silahkan klik tombol dibawah ini.
+            Pendaftaran, silahkan klik tombol dibawah ini.
           </p>
           <div class="jalur-btn-wrapper">
             <a href="{{ url('kuota-jalur') }}" class="btn btn-primary btn-jalur"
-              >Jalur Pendaftaran</a
+              >Pendaftaran</a
             >
           </div>
         </div>

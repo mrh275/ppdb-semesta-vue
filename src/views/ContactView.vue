@@ -2,7 +2,7 @@
 import depanSekolah from "../assets/img/depan-sekolah.png";
 export default {
   beforeMount() {
-    document.title = "Contact Us | PPDB SMAN 1 Rawamerta";
+    document.title = "Contact Us | PPDB SMK Ar-Raihan Cikampek";
   },
   data() {
     return {
@@ -93,44 +93,41 @@ export default {
       <div class="w-1/2 px-16 contact-info">
         <div class="flex items-center justify-start brand-contact-wrapper">
           <img
-            src="/assets/img/LOGO-SMALL.png"
-            alt="Logo PPDB SMA Negeri 1 Rawamerta"
+            src="/assets/img/Logo-SMK-Ar-Raihan-S.png"
+            alt="Logo PPDB SMK Ar-Raihan Cikampek"
             class="footer-img-brand"
           />
-          <span class="footer-brand-text">SMA Negeri 1 Rawamerta</span>
+          <span class="footer-brand-text">SMK Ar-Raihan Cikampek</span>
         </div>
         <div class="footer-text">
           <p class="py-2">
             <strong>Address</strong> <br />
-            Jl. Raya Garunggung - Panyingkiran Kec. Rawamerta Kab. Karawang,
-            Jawa Barat 41382
+            JL. Ahmad Yani - Dawuan Barat Kec. Cikampek Kab. Karawang, Jawa
+            Barat 41373
           </p>
           <p><i class="fa-solid fa-phone"></i>&nbsp; -</p>
           <p>
-            <i class="fa-solid fa-globe"></i>&nbsp;
-            <a
-              href="https://sman1rawamerta.sch.id"
-              target="_blank"
-              class="border-zinc-800 hover:border-b-2 hover:border-dotted"
-              >https://sman1rawamerta.sch.id</a
+            <i class="fa-solid fa-globe"></i>
+            <a href="http://www.smkarraihan.sch.id" target="_blank">
+              http://www.smkarraihan.sch.id</a
             >
           </p>
           <p>
-            <i class="fa-brands fa-instagram"></i>&nbsp;
+            <i class="fa-brands fa-instagram"></i>
             <a
-              href="https://www.instagram.com/sman1rawamerta/"
+              href="https://www.instagram.com/smkarraihancikampekofficial/"
               target="_blank"
-              class="border-zinc-800 hover:border-b-2 hover:border-dotted"
-              >@sman1rawamerta</a
+            >
+              @smkarraihancikampekofficial</a
             >
           </p>
           <p>
-            <i class="fa-brands fa-youtube"></i>&nbsp;
+            <i class="fa-brands fa-youtube"></i>
             <a
-              href="https://www.youtube.com/channel/UCvTaB-4bPPasVnUf7QYI3tg"
+              href="https://www.youtube.com/channel/UCOUclinXBfFmonuFoVAitHA"
               target="_blank"
-              class="border-zinc-800 hover:border-b-2 hover:border-dotted"
-              >SMAN 1 RAWAMERTA</a
+            >
+              SMK KESEHATAN AR RAIHAN OFFICIAL</a
             >
           </p>
         </div>

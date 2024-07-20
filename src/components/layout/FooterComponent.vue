@@ -5,44 +5,41 @@
         <div class="footer-left">
           <div class="footer-brand">
             <img
-              src="/assets/img/LOGO-SMALL.png"
+              src="/assets/img/Logo-SMK-Ar-Raihan-S.png"
               alt="Logo PPDB SMA Negeri 1 Rawamerta"
               class="footer-img-brand"
             />
-            <span class="footer-brand-text">SMA Negeri 1 Rawamerta</span>
+            <span class="footer-brand-text">SMK AR-RAIHAN CIKAMPEK</span>
           </div>
           <div class="footer-text">
             <p class="py-2">
               <strong>Address</strong> <br />
-              Jl. Raya Garunggung - Panyingkiran Kec. Rawamerta Kab. Karawang,
-              Jawa Barat 41382
+              JL. Ahmad Yani - Dawuan Barat Kec. Cikampek Kab. Karawang, Jawa
+              Barat 41373
             </p>
             <p><i class="fa-solid fa-phone"></i>&nbsp; -</p>
             <p>
-              <i class="fa-solid fa-globe"></i>&nbsp;
-              <a
-                href="https://sman1rawamerta.sch.id"
-                target="_blank"
-                class="border-zinc-800 hover:border-b-2 hover:border-dotted"
-                >https://sman1rawamerta.sch.id</a
+              <i class="fa-solid fa-globe"></i>
+              <a href="http://www.smkarraihan.sch.id" target="_blank">
+                http://www.smkarraihan.sch.id</a
               >
             </p>
             <p>
-              <i class="fa-brands fa-instagram"></i>&nbsp;
+              <i class="fa-brands fa-instagram"></i>
               <a
-                href="https://www.instagram.com/sman1rawamerta/"
+                href="https://www.instagram.com/smkarraihancikampekofficial/"
                 target="_blank"
-                class="border-zinc-800 hover:border-b-2 hover:border-dotted"
-                >@sman1rawamerta</a
+              >
+                @smkarraihancikampekofficial</a
               >
             </p>
             <p>
-              <i class="fa-brands fa-youtube"></i>&nbsp;
+              <i class="fa-brands fa-youtube"></i>
               <a
-                href="https://www.youtube.com/channel/UCvTaB-4bPPasVnUf7QYI3tg"
+                href="https://www.youtube.com/channel/UCOUclinXBfFmonuFoVAitHA"
                 target="_blank"
-                class="border-zinc-800 hover:border-b-2 hover:border-dotted"
-                >SMAN 1 RAWAMERTA</a
+              >
+                SMK KESEHATAN AR RAIHAN OFFICIAL</a
               >
             </p>
           </div>
@@ -53,15 +50,13 @@
           <div class="backlink">
             <ul class="backlink-list">
               <li class="backlink-item">
-                <a href="https://sman1rawamerta.sch.id" class="backlink-link"
+                <a href="http://www.smkarraihan.sch.id" class="backlink-link"
                   >Website Sekolah</a
                 >
               </li>
               <li class="backlink-item">
-                <a
-                  href="https://vervalponsel.sman1rawamerta.sch.id"
-                  class="backlink-link"
-                  >Verval Ponsel</a
+                <a href="https://dapo.kemdikbud.go.id" class="backlink-link"
+                  >Dapodik</a
                 >
               </li>
               <li class="backlink-item">
@@ -92,12 +87,12 @@
       </div>
       <div class="footer-bottom">
         <div class="footer-bottom-left">
-          Copyright ©️ <span>{{ year }}</span> SMA Negeri 1 Rawamerta. All Right
+          Copyright ©️ <span>{{ year }}</span> SMK Ar-Raihan Cikampek. All Right
           Reserved.
         </div>
         <div class="footer-bottom-right">
           Made with ❤️ by
-          <a href="https://muhamadramdani.my.id" class="creator">dNezast</a>
+          <a href="https://muhamadramdani.my.id" class="creator">MRH</a>
         </div>
       </div>
     </div>
