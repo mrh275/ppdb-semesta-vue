@@ -1,5 +1,7 @@
 <script>
 import Swal from "sweetalert2";
+import { mapActions, mapState } from "pinia";
+import useRegisterStore from "@/stores/register";
 
 export default {
   name: "FormOrangTua",
@@ -24,8 +26,12 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapState(useRegisterStore, ["currentDataOrangTua"]),
+  },
   methods: {
-    submitDataOrangTua() {
+    ...mapActions(useRegisterStore, ["storeDataOrangTua", "getCurrentBiodata"]),
+    promptDataOrangTua() {
       Swal.fire({
         title: "Apa anda sudah yakin?",
         text: "Pastikan data yang anda masukkan sudah benar.",
@@ -35,50 +41,59 @@ export default {
         cancelButtonText: "Belum",
       }).then((result) => {
         if (result.value) {
-          Swal.fire({
-            title: "Sedang menyimpan data...",
-            timer: 2000,
-            showConfirmButton: false,
-            didOpen: () => {
-              Swal.showLoading();
-            },
-          }).then(() => {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-end",
+          this.submitDataOrangTua().then(() => {
+            Swal.fire({
+              title: "Sedang menyimpan data...",
+              timer: 2000,
               showConfirmButton: false,
-              showCloseButton: true,
-              timer: 3000,
-              timerProgressBar: true,
-            });
+              didOpen: () => {
+                Swal.showLoading();
+              },
+            }).then(() => {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                showCloseButton: true,
+                timer: 3000,
+                timerProgressBar: true,
+              });
 
-            Toast.fire({
-              icon: "success",
-              title: "Data orang tua berhasil disimpan!",
+              Toast.fire({
+                icon: "success",
+                title: "Data orang tua berhasil disimpan!",
+              });
+              this.$emit("nextForm", {
+                status: "",
+                isComplete: "completed",
+                isBackWard: "current-item",
+              });
+              document
+                .querySelector(".form-orang-tua-wrapper")
+                .classList.add("completed");
+              document
+                .querySelector(".form-orang-tua-wrapper")
+                .classList.remove("show");
+              document
+                .querySelector(".form-periodik-wrapper")
+                .classList.add("show");
+              document
+                .querySelector(".form-wrapper-responsive")
+                .classList.remove("orang-tua");
+              document
+                .querySelector(".form-wrapper-responsive")
+                .classList.add("periodik");
             });
-            this.$emit("nextForm", {
-              status: "",
-              isComplete: "completed",
-              isBackWard: "current-item",
-            });
-            document
-              .querySelector(".form-orang-tua-wrapper")
-              .classList.add("completed");
-            document
-              .querySelector(".form-orang-tua-wrapper")
-              .classList.remove("show");
-            document
-              .querySelector(".form-periodik-wrapper")
-              .classList.add("show");
-            document
-              .querySelector(".form-wrapper-responsive")
-              .classList.remove("orang-tua");
-            document
-              .querySelector(".form-wrapper-responsive")
-              .classList.add("periodik");
           });
         }
       });
+    },
+    async submitDataOrangTua() {
+      try {
+        await this.storeDataOrangTua(this.dataOrangTua);
+      } catch (error) {
+        console.log(error);
+      }
     },
     backToBiodata() {
       this.$emit("previousForm", {
@@ -123,6 +138,7 @@ export default {
               class="form-control"
               id="nama_ayah"
               name="nama_ayah"
+              v-model="dataOrangTua.nama_ayah"
             />
           </div>
           <div class="form-group">
@@ -132,6 +148,7 @@ export default {
               class="form-control"
               id="tempat_lahir_ayah"
               name="tempat_lahir_ayah"
+              v-model="dataOrangTua.tempat_lahir_ayah"
             />
           </div>
           <div class="form-group">
@@ -141,6 +158,7 @@ export default {
               class="form-control"
               id="tanggal_lahir_ayah"
               name="tanggal_lahir_ayah"
+              v-model="dataOrangTua.tanggal_lahir_ayah"
             />
           </div>
           <div class="form-group">
@@ -149,6 +167,7 @@ export default {
               name="pendidikan_ayah"
               id="input-pendidikan-ayah"
               class="form-select"
+              v-model="dataOrangTua.pendidikan_ayah"
             >
               <option value="">Pilih :</option>
               <option value="1">Tidak Bersekolah</option>
@@ -169,6 +188,7 @@ export default {
               name="pekerjaan_ayah"
               id="input-pekerjaan-ayah"
               class="form-select"
+              v-model="dataOrangTua.pekerjaan_ayah"
             >
               <option value="">Pilih :</option>
               <option value="1">Tidak Bekerja</option>
@@ -193,6 +213,7 @@ export default {
               name="penghasilan_ayah"
               id="input-penghasilan-ayah"
               class="form-select"
+              v-model="dataOrangTua.penghasilan_ayah"
             >
               <option value="">Pilih :</option>
               <option value="1">Tidak Berpenghasilan</option>
@@ -211,6 +232,7 @@ export default {
               class="form-control"
               id="input-alamat-ayah"
               rows="3"
+              v-model="dataOrangTua.alamat_ayah"
             ></textarea>
           </div>
         </div>
@@ -222,6 +244,7 @@ export default {
               class="form-control"
               id="nama_ibu"
               name="nama_ibu"
+              v-model="dataOrangTua.nama_ibu"
             />
           </div>
           <div class="form-group">
@@ -231,6 +254,7 @@ export default {
               class="form-control"
               id="tempat_lahir_ibu"
               name="tempat_lahir_ibu"
+              v-model="dataOrangTua.tempat_lahir_ibu"
             />
           </div>
           <div class="form-group">
@@ -240,6 +264,7 @@ export default {
               class="form-control"
               id="tanggal_lahir_ibu"
               name="tanggal_lahir_ibu"
+              v-model="dataOrangTua.tanggal_lahir_ibu"
             />
           </div>
           <div class="form-group">
@@ -248,6 +273,7 @@ export default {
               name="pendidikan_ibu"
               id="input-pendidikan-ibu"
               class="form-select"
+              v-model="dataOrangTua.pendidikan_ibu"
             >
               <option value="">Pilih :</option>
               <option value="1">Tidak Bersekolah</option>
@@ -268,6 +294,7 @@ export default {
               name="pekerjaan_ibu"
               id="input-pekerjaan-ibu"
               class="form-select"
+              v-model="dataOrangTua.pekerjaan_ibu"
             >
               <option value="">Pilih :</option>
               <option value="1">Tidak Bekerja</option>
@@ -292,6 +319,7 @@ export default {
               name="penghasilan_ibu"
               id="input-penghasilan-ibu"
               class="form-select"
+              v-model="dataOrangTua.penghasilan_ibu"
             >
               <option value="">Pilih :</option>
               <option value="1">Tidak Berpenghasilan</option>
@@ -310,6 +338,7 @@ export default {
               class="form-control"
               id="input-alamat-ibu"
               rows="3"
+              v-model="dataOrangTua.alamat_ibu"
             ></textarea>
           </div>
         </div>
@@ -326,7 +355,7 @@ export default {
           class="btn btn-primary"
           type="button"
           id="btn-data-orang-tua"
-          @click.prevent="submitDataOrangTua"
+          @click.prevent="promptDataOrangTua"
         >
           Simpan
         </button>
