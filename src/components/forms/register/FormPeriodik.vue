@@ -3,8 +3,40 @@ import Swal from "sweetalert2";
 
 export default {
   name: "FormPeriodik",
+  data() {
+    return {
+      dataPeriodik: {
+        noreg_ppdb: sessionStorage.noRegister ? sessionStorage.noRegister : "",
+        jenjang: "",
+        nama_sekolah: "",
+        alamat_sekolah: "",
+        nomor_ijazah: "",
+        nopes_ujian: "",
+        hobi: "",
+        cita_cita: "",
+        tinggi_badan: "",
+        berat_badan: "",
+        jarak_rumah: "",
+        waktu_tempuh: "",
+        anak_ke: "",
+        jumlah_saudara: "",
+        kip: "",
+        kis: "",
+        kks: "",
+        kps: "",
+        pkh: "",
+      },
+      statusKesejahteraan: {
+        is_kip: "",
+        is_kis: "",
+        is_kks: "",
+        is_kps: "",
+        is_pkh: "",
+      },
+    };
+  },
   methods: {
-    submitDataPeriodik() {
+    promptDataPeriodik() {
       Swal.fire({
         title: "Apa anda sudah yakin?",
         text: "Pastikan data yang anda masukkan sudah benar.",
@@ -14,6 +46,7 @@ export default {
         cancelButtonText: "Belum",
       }).then((result) => {
         if (result.value) {
+          console.log(this.dataPeriodik);
           Swal.fire({
             title: "Sedang menyimpan data...",
             timer: 2000,
@@ -270,7 +303,12 @@ export default {
           <div class="address-group">
             <div class="form-group kip">
               <label for="is_kip">Apakah kamu memiliki KIP?</label>
-              <select name="is_kip" id="is_kip" class="form-select">
+              <select
+                name="is_kip"
+                id="is_kip"
+                class="form-select"
+                v-model="statusKesejahteraan.is_kip"
+              >
                 <option value="">Pilih :</option>
                 <option value="1" id="kip-1">Ya</option>
                 <option value="0">Tidak</option>
@@ -283,14 +321,19 @@ export default {
                 class="form-control"
                 id="kip"
                 name="kip"
-                disabled="disabled"
+                :disabled="statusKesejahteraan.is_kip == 1 ? disabled : ''"
               />
             </div>
           </div>
           <div class="address-group">
             <div class="form-group kis">
               <label for="is_kis">Apakah kamu memiliki KIS?</label>
-              <select name="is_kis" id="is_kis" class="form-select">
+              <select
+                name="is_kis"
+                id="is_kis"
+                class="form-select"
+                v-model="statusKesejahteraan.is_kis"
+              >
                 <option value="">Pilih :</option>
                 <option value="1" id="kis-1">Ya</option>
                 <option value="0">Tidak</option>
@@ -303,14 +346,19 @@ export default {
                 class="form-control"
                 id="kis"
                 name="kis"
-                disabled="disabled"
+                :disabled="statusKesejahteraan.is_kis == 1 ? disabled : ''"
               />
             </div>
           </div>
           <div class="address-group">
             <div class="form-group kks">
               <label for="is_kks">Apakah kamu memiliki KKS?</label>
-              <select name="is_kks" id="is_kks" class="form-select">
+              <select
+                name="is_kks"
+                id="is_kks"
+                class="form-select"
+                v-model="statusKesejahteraan.is_kks"
+              >
                 <option value="">Pilih :</option>
                 <option value="1" id="kks-1">Ya</option>
                 <option value="0">Tidak</option>
@@ -323,14 +371,19 @@ export default {
                 class="form-control"
                 id="kks"
                 name="kks"
-                disabled="disabled"
+                :disabled="statusKesejahteraan.is_kks == 1 ? disabled : ''"
               />
             </div>
           </div>
           <div class="address-group">
             <div class="form-group kps">
               <label for="is_kps">Apakah kamu memiliki KPS?</label>
-              <select name="is_kps" id="is_kps" class="form-select">
+              <select
+                name="is_kps"
+                id="is_kps"
+                class="form-select"
+                v-model="statusKesejahteraan.is_kps"
+              >
                 <option value="">Pilih :</option>
                 <option value="1" id="kps-1">Ya</option>
                 <option value="0">Tidak</option>
@@ -343,14 +396,19 @@ export default {
                 class="form-control"
                 id="kps"
                 name="kps"
-                disabled="disabled"
+                :disabled="statusKesejahteraan.is_kps == 1 ? disabled : ''"
               />
             </div>
           </div>
           <div class="address-group">
             <div class="form-group pkh">
               <label for="is_pkh">Apakah kamu memiliki PKH?</label>
-              <select name="is_pkh" id="is_pkh" class="form-select">
+              <select
+                name="is_pkh"
+                id="is_pkh"
+                class="form-select"
+                v-model="statusKesejahteraan.is_pkh"
+              >
                 <option value="">Pilih :</option>
                 <option value="1" id="pkh-1">Ya</option>
                 <option value="0">Tidak</option>
@@ -363,7 +421,7 @@ export default {
                 class="form-control"
                 id="pkh"
                 name="pkh"
-                disabled="disabled"
+                :disabled="statusKesejahteraan.is_pkh == 1 ? disabled : ''"
               />
             </div>
           </div>
@@ -381,7 +439,7 @@ export default {
           class="btn btn-primary"
           type="button"
           id="btn-data-periodik"
-          @click.prevent="submitDataPeriodik()"
+          @click.prevent="promptDataPeriodik()"
         >
           Simpan
         </button>
