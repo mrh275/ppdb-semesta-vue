@@ -4,7 +4,9 @@ import axios from "axios";
 export default defineStore('register', {
     state: () => ({
         noRegister: "",
-        currentBiodata: null
+        currentBiodata: null,
+        currentDataOrangTua: null,
+        storedDataOrangTua: "",
     }),
     actions: {
         async storeBiodata(values) {
@@ -19,6 +21,19 @@ export default defineStore('register', {
                 }).then((response) => {
                     sessionStorage.setItem("noRegister", response.data.noreg_ppdb);
                     this.noRegister = response.data.noreg_ppdb;
+                });
+        },
+        async storeDataOrangTua(values) {
+            const url = "/data-orangtua"
+            const data = values
+            await axios
+                .post(url, data, {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+                    },
+                }).then((response) => {
+                    this.storedDataOrangTua = response.data;
                 });
         },
         async getCurrentBiodata(values) {
