@@ -118,7 +118,9 @@ export default {
     async getDataOrangTua() {
       try {
         await this.getCurrentBiodata(this.dataOrangTua.noreg_ppdb);
-        this.dataOrangTua = this.currentDataOrangTua;
+        if (this.currentDataOrangTua) {
+          this.dataOrangTua = this.currentDataOrangTua;
+        }
       } catch (error) {
         console.log(error);
       }
