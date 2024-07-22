@@ -35,8 +35,15 @@ export default {
       },
     };
   },
+  beforeMount() {
+    this.getDataPeriodik();
+  },
   computed: {
-    ...mapState(useRegisterStore, ["currentDataPeriodik"]),
+    ...mapState(useRegisterStore, [
+      "currentDataPeriodik",
+      "currentDataKesejahteraan",
+      "currentAsalSekolah",
+    ]),
   },
   methods: {
     ...mapActions(useRegisterStore, ["storeDataPeriodik", "getCurrentBiodata"]),
@@ -106,6 +113,21 @@ export default {
     async submitDataPeriodik() {
       try {
         await this.storeDataPeriodik(this.dataPeriodik);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getDataPeriodik() {
+      try {
+        await this.getCurrentBiodata(this.dataPeriodik.noreg_ppdb);
+        if (this.currentDataPeriodik) {
+          const newData = {
+            ...this.currentAsalSekolah,
+            ...this.currentDataPeriodik,
+            ...this.currentDataKesejahteraan,
+          };
+          this.dataPeriodik = newData;
+        }
       } catch (error) {
         console.log(error);
       }
