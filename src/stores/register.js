@@ -6,6 +6,7 @@ export default defineStore('register', {
         noRegister: "",
         currentBiodata: null,
         currentDataOrangTua: null,
+        currentDataPeriodik: null,
         storedDataOrangTua: "",
         currentStatusRegister: "biodata",
     }),
@@ -21,8 +22,9 @@ export default defineStore('register', {
                     },
                 }).then((response) => {
                     sessionStorage.setItem("noRegister", response.data.noreg_ppdb);
+                    sessionStorage.setItem("currentStatusRegister", "orangtua");
                     this.noRegister = response.data.noreg_ppdb;
-                    this.currentStatusRegister = "orangtua";
+                    // this.currentStatusRegister = "orangtua";
                 });
         },
         async storeDataOrangTua(values) {
@@ -35,6 +37,7 @@ export default defineStore('register', {
                         Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
                     },
                 }).then((response) => {
+                    sessionStorage.setItem("currentStatusRegister", "periodik");
                     this.storedDataOrangTua = response.data;
                 });
         },
@@ -48,6 +51,7 @@ export default defineStore('register', {
                         Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
                     },
                 }).then((response) => {
+                    sessionStorage.setItem("currentStatusRegister", "upload-files");
                     this.storedDataPeriodik = response.data;
                 });
         },
@@ -63,6 +67,7 @@ export default defineStore('register', {
                 }).then((response) => {
                     this.currentBiodata = response.data.data[0];
                     this.currentDataOrangTua = response.data.data[0].data_orang_tua[0] ? response.data.data[0].data_orang_tua[0] : null;
+                    this.currentDataPeriodik = response.data.data[0].data_periodik[0] ? response.data.data[0].data_periodik[0] : null;
                 });
             return response;
         }
