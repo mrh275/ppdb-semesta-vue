@@ -1,5 +1,7 @@
 <script>
 import Swal from "sweetalert2";
+import useRegisterStore from "@/stores/register";
+import { mapState, mapActions } from "pinia";
 
 export default {
   name: "FormPeriodik",
@@ -25,8 +27,6 @@ export default {
         kks: "",
         kps: "",
         pkh: "",
-      },
-      statusKesejahteraan: {
         is_kip: "",
         is_kis: "",
         is_kks: "",
@@ -35,7 +35,11 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapState(useRegisterStore, ["currentDataPeriodik"]),
+  },
   methods: {
+    ...mapActions(useRegisterStore, ["storeDataPeriodik", "getCurrentBiodata"]),
     promptDataPeriodik() {
       Swal.fire({
         title: "Apa anda sudah yakin?",
@@ -47,6 +51,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           console.log(this.dataPeriodik);
+          this.submitDataPeriodik();
           Swal.fire({
             title: "Sedang menyimpan data...",
             timer: 2000,
@@ -98,6 +103,13 @@ export default {
         }
       });
     },
+    async submitDataPeriodik() {
+      try {
+        await this.storeDataPeriodik(this.dataPeriodik);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     backToDataOrangTua() {
       this.$emit("previousForm", {
         status: "current-item",
@@ -138,7 +150,12 @@ export default {
         <div class="form-section-left">
           <div class="form-group">
             <label for="jenjang">Jenjang</label>
-            <select name="jenjang" id="jenjang" class="form-select">
+            <select
+              name="jenjang"
+              id="jenjang"
+              class="form-select"
+              v-model="dataPeriodik.jenjang"
+            >
               <option value="">Pilih :</option>
               <option value="1">SMP</option>
               <option value="2">MTs</option>
@@ -151,6 +168,7 @@ export default {
               class="form-control"
               id="nama_sekolah"
               name="nama_sekolah"
+              v-model="dataPeriodik.nama_sekolah"
             />
           </div>
           <div class="form-group">
@@ -161,6 +179,7 @@ export default {
               cols="30"
               rows="3"
               class="form-control"
+              v-model="dataPeriodik.alamat_sekolah"
             ></textarea>
           </div>
           <div class="form-group">
@@ -170,6 +189,7 @@ export default {
               class="form-control"
               id="nomor_ijazah"
               name="nomor_ijazah"
+              v-model="dataPeriodik.nomor_ijazah"
             />
           </div>
           <div class="form-group">
@@ -179,6 +199,7 @@ export default {
               class="form-control"
               id="nopes_ujian"
               name="nopes_ujian"
+              v-model="dataPeriodik.nopes_ujian"
             />
           </div>
         </div>
@@ -186,7 +207,12 @@ export default {
           <div class="address-group">
             <div class="form-group hobi">
               <label for="hobi">Hobi</label>
-              <select name="hobi" id="hobi" class="form-select">
+              <select
+                name="hobi"
+                id="hobi"
+                class="form-select"
+                v-model="dataPeriodik.hobi"
+              >
                 <option value="">Pilih :</option>
                 <option value="1">Belanja</option>
                 <option value="2">Berkemah</option>
@@ -213,7 +239,12 @@ export default {
 
             <div class="form-group cita-cita">
               <label for="cita_cita">Cita-cita</label>
-              <select name="cita_cita" id="cita_cita" class="form-select">
+              <select
+                name="cita_cita"
+                id="cita_cita"
+                class="form-select"
+                v-model="dataPeriodik.cita_cita"
+              >
                 <option value="">Pilih :</option>
                 <option value="1">Arsitek</option>
                 <option value="2">Atlet</option>
@@ -246,6 +277,7 @@ export default {
                 class="form-control"
                 id="tinggi_badan"
                 name="tinggi_badan"
+                v-model="dataPeriodik.tinggi_badan"
               />
             </div>
             <div class="form-group kecamatan">
@@ -255,6 +287,7 @@ export default {
                 class="form-control"
                 id="berat_badan"
                 name="berat_badan"
+                v-model="dataPeriodik.berat_badan"
               />
             </div>
           </div>
@@ -266,6 +299,7 @@ export default {
                 class="form-control"
                 id="jarak_rumah"
                 name="jarak_rumah"
+                v-model="dataPeriodik.jarak_rumah"
               />
             </div>
             <div class="form-group provinsi">
@@ -275,6 +309,7 @@ export default {
                 class="form-control"
                 id="waktu_tempuh"
                 name="waktu_tempuh"
+                v-model="dataPeriodik.waktu_tempuh"
               />
             </div>
           </div>
@@ -286,6 +321,7 @@ export default {
                 class="form-control"
                 id="anak_ke"
                 name="anak_ke"
+                v-model="dataPeriodik.anak_ke"
               />
             </div>
             <div class="form-group jumlah-saudara">
@@ -295,6 +331,7 @@ export default {
                 class="form-control"
                 id="jumlah_saudara"
                 name="jumlah_saudara"
+                v-model="dataPeriodik.jumlah_saudara"
               />
             </div>
           </div>
@@ -307,7 +344,7 @@ export default {
                 name="is_kip"
                 id="is_kip"
                 class="form-select"
-                v-model="statusKesejahteraan.is_kip"
+                v-model="dataPeriodik.is_kip"
               >
                 <option value="">Pilih :</option>
                 <option value="1" id="kip-1">Ya</option>
@@ -321,7 +358,7 @@ export default {
                 class="form-control"
                 id="kip"
                 name="kip"
-                :disabled="statusKesejahteraan.is_kip == 1 ? disabled : ''"
+                :disabled="is_kip == 1 ? disabled : ''"
               />
             </div>
           </div>
@@ -332,7 +369,7 @@ export default {
                 name="is_kis"
                 id="is_kis"
                 class="form-select"
-                v-model="statusKesejahteraan.is_kis"
+                v-model="dataPeriodik.is_kis"
               >
                 <option value="">Pilih :</option>
                 <option value="1" id="kis-1">Ya</option>
@@ -346,7 +383,7 @@ export default {
                 class="form-control"
                 id="kis"
                 name="kis"
-                :disabled="statusKesejahteraan.is_kis == 1 ? disabled : ''"
+                :disabled="is_kis == 1 ? disabled : ''"
               />
             </div>
           </div>
@@ -357,7 +394,7 @@ export default {
                 name="is_kks"
                 id="is_kks"
                 class="form-select"
-                v-model="statusKesejahteraan.is_kks"
+                v-model="dataPeriodik.is_kks"
               >
                 <option value="">Pilih :</option>
                 <option value="1" id="kks-1">Ya</option>
@@ -371,7 +408,7 @@ export default {
                 class="form-control"
                 id="kks"
                 name="kks"
-                :disabled="statusKesejahteraan.is_kks == 1 ? disabled : ''"
+                :disabled="is_kks == 1 ? disabled : ''"
               />
             </div>
           </div>
@@ -382,7 +419,7 @@ export default {
                 name="is_kps"
                 id="is_kps"
                 class="form-select"
-                v-model="statusKesejahteraan.is_kps"
+                v-model="dataPeriodik.is_kps"
               >
                 <option value="">Pilih :</option>
                 <option value="1" id="kps-1">Ya</option>
@@ -396,7 +433,7 @@ export default {
                 class="form-control"
                 id="kps"
                 name="kps"
-                :disabled="statusKesejahteraan.is_kps == 1 ? disabled : ''"
+                :disabled="is_kps == 1 ? disabled : ''"
               />
             </div>
           </div>
@@ -407,7 +444,7 @@ export default {
                 name="is_pkh"
                 id="is_pkh"
                 class="form-select"
-                v-model="statusKesejahteraan.is_pkh"
+                v-model="dataPeriodik.is_pkh"
               >
                 <option value="">Pilih :</option>
                 <option value="1" id="pkh-1">Ya</option>
@@ -421,7 +458,7 @@ export default {
                 class="form-control"
                 id="pkh"
                 name="pkh"
-                :disabled="statusKesejahteraan.is_pkh == 1 ? disabled : ''"
+                :disabled="is_pkh == 1 ? disabled : ''"
               />
             </div>
           </div>
