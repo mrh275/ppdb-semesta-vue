@@ -45,6 +45,17 @@ export default {
     stepWizardList.forEach((step) => {
       step.firstElementChild.style.cursor = "pointer";
     });
+
+    // check status registration
+    if (sessionStorage.getItem("currentStatusRegister") == "orangtua") {
+      this.jumpToDataOrangTua();
+    } else if (sessionStorage.getItem("currentStatusRegister") == "periodik") {
+      this.jumpToDataPeriodik();
+    } else if (
+      sessionStorage.getItem("currentStatusRegister") == "upload-files"
+    ) {
+      this.jumpToUploadFiles();
+    }
   },
   components: {
     FormBiodata,
