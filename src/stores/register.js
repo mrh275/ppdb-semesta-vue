@@ -7,6 +7,8 @@ export default defineStore('register', {
         currentBiodata: null,
         currentDataOrangTua: null,
         currentDataPeriodik: null,
+        currentDataKesejahteraan: null,
+        currentAsalSekolah: null,
         storedDataOrangTua: "",
         currentStatusRegister: "biodata",
     }),
@@ -68,6 +70,8 @@ export default defineStore('register', {
                     this.currentBiodata = response.data.data[0];
                     this.currentDataOrangTua = response.data.data[0].data_orang_tua[0] ? response.data.data[0].data_orang_tua[0] : null;
                     this.currentDataPeriodik = response.data.data[0].data_periodik[0] ? response.data.data[0].data_periodik[0] : null;
+                    this.currentDataKesejahteraan = response.data.data[0].data_kesejahteraan[0] ? response.data.data[0].data_kesejahteraan[0] : null;
+                    this.currentAsalSekolah = response.data.data[0].asal_sekolah[0] ? response.data.data[0].asal_sekolah[0] : null;
                 });
             return response;
         }
