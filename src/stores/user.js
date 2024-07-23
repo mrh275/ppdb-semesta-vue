@@ -33,7 +33,11 @@ export default defineStore('user', {
                         this.userLoggedIn = true;
                         document.querySelector("#login-form").classList.add("invisible");
                         document.querySelector("#login-form").classList.add("opacity-0");
-                        window.location.reload()
+                        if (data.username == "administrator") {
+                            window.location.href = "http://127.0.0.1:8000/admin";
+                        } else {
+                            window.location.reload()
+                        }
                     });
                 });
         },
