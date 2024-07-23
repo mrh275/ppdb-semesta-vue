@@ -9,8 +9,34 @@ export default {
   name: "FormUploadDocument",
   data() {
     return {
-      dropzoneUrl: axios.defaults.baseURL + "/upload-files/ijazah",
+      dropzoneUrl: axios.defaults.baseURL + "upload-files/ijazah",
     };
+  },
+  mounted() {
+    this.ijazahUpload();
+
+    const ijazahUpload = new Dropzone("#ijazah-upload", {
+      url: this.dropzoneUrl,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      },
+      acceptedFiles: ".jpg, .jpeg, .png",
+      maxFilesize: 1,
+      paramName: "ijazahFile",
+      thumbnailWidth: 180,
+      thumbnailHeight: 180,
+      addRemoveLinks: true,
+      dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
+      dictCancelUpload: "",
+      previewTemplate: document.querySelector("div#dropzoneItemTemplate")
+        .innerHTML,
+      dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
+      dictInvalidFileType:
+        "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
+    });
+    ijazahUpload.on("addedfile", (file) => {
+      console.log(file);
+    });
   },
   methods: {
     ijazahUpload() {
