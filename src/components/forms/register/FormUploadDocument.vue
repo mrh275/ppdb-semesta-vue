@@ -208,6 +208,7 @@ export default {
         cancelButtonText: "Belum",
       }).then((result) => {
         if (result.value) {
+          sessionStorage.setItem("currentStatusRegister", "bukti-daftar");
           Swal.fire({
             title: "Sedang menyimpan data...",
             timer: 2000,
@@ -226,6 +227,18 @@ export default {
               isComplete: "completed",
               isBackWard: "current-item",
             });
+            document
+              .querySelector(".form-kesejahteraan-wrapper")
+              .classList.remove("show");
+            document
+              .querySelector(".cetak-pendaftaran-wrapper")
+              .classList.add("show");
+            document
+              .querySelector(".form-wrapper-responsive")
+              .classList.remove("kesejahteraan");
+            document
+              .querySelector(".form-wrapper-responsive")
+              .classList.add("cetak-bukti");
           });
         }
       });
