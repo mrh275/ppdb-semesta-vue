@@ -3,6 +3,7 @@ import FormBiodata from "@/components/forms/register/FormBiodata.vue";
 import FormOrangTua from "@/components/forms/register/FormOrangTua.vue";
 import FormPeriodik from "@/components/forms/register/FormPeriodik.vue";
 import FormUploadDocument from "@/components/forms/register/FormUploadDocument.vue";
+import BuktiPendaftaran from "../components/forms/register/BuktiPendaftaran.vue";
 
 export default {
   name: "RegisterView",
@@ -19,13 +20,6 @@ export default {
       } else {
         body.style.display = "block";
       }
-    }
-
-    // Remove some menu when on register page
-    if (url == "/register") {
-      document.getElementById("menu-terms").remove();
-      document.getElementById("menu-kuota").remove();
-      document.getElementById("menu-faq").remove();
     }
 
     // Progress Bar fixed on scroll
@@ -55,6 +49,17 @@ export default {
       sessionStorage.getItem("currentStatusRegister") == "upload-files"
     ) {
       this.jumpToUploadFiles();
+    } else if (
+      sessionStorage.getItem("currentStatusRegister") == "bukti-daftar"
+    ) {
+      this.jumpToBuktiDaftar();
+    }
+
+    // Remove some menu when on register page
+    if (url == "/register") {
+      document.getElementById("menu-terms").remove();
+      document.getElementById("menu-kuota").remove();
+      document.getElementById("menu-faq").remove();
     }
   },
   components: {
@@ -62,6 +67,7 @@ export default {
     FormOrangTua,
     FormPeriodik,
     FormUploadDocument,
+    BuktiPendaftaran,
   },
   data() {
     return {
@@ -245,6 +251,51 @@ export default {
         .querySelector(".form-wrapper-responsive")
         .classList.add("kesejahteraan");
     },
+    jumpToBuktiDaftar() {
+      this.changeStatusBiodata({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      this.changeStatusOrangTua({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      this.changeStatusPeriodik({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      this.registrationStatus({
+        status: "",
+        isComplete: "completed",
+        isBackWard: "current-item",
+      });
+      document.querySelector(".form-biodata-wrapper").classList.remove("show");
+      document
+        .querySelector(".form-orang-tua-wrapper")
+        .classList.remove("show");
+      document.querySelector(".form-periodik-wrapper").classList.remove("show");
+      document
+        .querySelector(".form-kesejahteraan-wrapper")
+        .classList.remove("show");
+      document
+        .querySelector(".cetak-pendaftaran-wrapper")
+        .classList.add("show");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("orang-tua");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("periodik");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.remove("kesejahteraan");
+      document
+        .querySelector(".form-wrapper-responsive")
+        .classList.add("cetak-bukti");
+    },
   },
 };
 </script>
@@ -330,6 +381,7 @@ export default {
             @finishRegistration="registrationStatus"
             :isCompleted="isUploadDocumentsCompleted"
           />
+          <BuktiPendaftaran />
         </div>
       </div>
     </div>
