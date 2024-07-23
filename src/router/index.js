@@ -3,7 +3,6 @@ import HomeView from "../views/HomeView.vue";
 import DataPendaftar from '@/views/DataPendaftar.vue';
 import ContactView from '@/views/ContactView.vue'
 import RegisterView from '@/views/RegisterView.vue'
-import CekPendaftar from '@/views/CekPendaftar.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,11 +24,6 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: ContactView
-    },
-    {
-      path: '/cek-pendaftar',
-      name: 'cekPendaftar',
-      component: CekPendaftar
     },
     {
       path: '/register',
