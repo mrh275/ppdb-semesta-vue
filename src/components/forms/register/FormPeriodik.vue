@@ -46,7 +46,11 @@ export default {
     ]),
   },
   methods: {
-    ...mapActions(useRegisterStore, ["storeDataPeriodik", "getCurrentBiodata"]),
+    ...mapActions(useRegisterStore, [
+      "storeDataPeriodik",
+      "getCurrentBiodata",
+      "getAsalSekolah",
+    ]),
     promptDataPeriodik() {
       Swal.fire({
         title: "Apa anda sudah yakin?",
@@ -119,13 +123,14 @@ export default {
     },
     async getDataPeriodik() {
       try {
-        await this.getCurrentBiodata(this.dataPeriodik.noreg_ppdb);
+        await this.getAsalSekolah(this.dataPeriodik.noreg_ppdb);
         if (this.currentDataPeriodik) {
           const newData = {
             ...this.currentAsalSekolah,
             ...this.currentDataPeriodik,
             ...this.currentDataKesejahteraan,
           };
+          console.log(newData);
           this.dataPeriodik = newData;
         }
       } catch (error) {
