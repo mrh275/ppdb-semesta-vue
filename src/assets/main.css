@@ -346,7 +346,7 @@ html {
     }
 
     .form-wrapper-responsive {
-        @apply bg-zinc-200 px-10 py-6 relative w-full h-[55rem] overflow-hidden transition-all ease-in-out duration-200;
+        @apply bg-zinc-200 px-10 py-6 relative w-full h-[60rem] overflow-hidden transition-all ease-in-out duration-200;
     }
 
     .form-wrapper-responsive.orang-tua {
