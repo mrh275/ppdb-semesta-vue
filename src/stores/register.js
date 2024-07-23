@@ -57,6 +57,18 @@ export default defineStore('register', {
                     this.storedDataPeriodik = response.data;
                 });
         },
+        async resetRegister() {
+            sessionStorage.removeItem("noRegister");
+            sessionStorage.removeItem("currentStatusRegister");
+            this.noRegister = "";
+            this.currentBiodata = null;
+            this.currentDataOrangTua = null;
+            this.currentDataPeriodik = null;
+            this.currentDataKesejahteraan = null;
+            this.currentAsalSekolah = null;
+            this.storedDataOrangTua = "";
+            this.currentStatusRegister = "biodata";
+        },
         async getCurrentBiodata(values) {
             const url = "/active-pendaftar/" + values;
             let response = "";
