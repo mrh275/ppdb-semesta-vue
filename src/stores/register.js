@@ -83,7 +83,20 @@ export default defineStore('register', {
                     this.currentDataOrangTua = response.data.data[0].data_orang_tua[0] ? response.data.data[0].data_orang_tua[0] : null;
                     this.currentDataPeriodik = response.data.data[0].data_periodik[0] ? response.data.data[0].data_periodik[0] : null;
                     this.currentDataKesejahteraan = response.data.data[0].data_kesejahteraan[0] ? response.data.data[0].data_kesejahteraan[0] : null;
-                    this.currentAsalSekolah = response.data.data[0].asal_sekolah[0] ? response.data.data[0].asal_sekolah[0] : null;
+                });
+            return response;
+        },
+        async getAsalSekolah(values) {
+            const url = "/asal-sekolah/" + values;
+            let response = "";
+            await axios
+                .get(url, {
+                    headers: {
+                        Accept: "application/json",
+                        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+                    },
+                }).then((response) => {
+                    this.currentAsalSekolah = response.data.data[0];
                 });
             return response;
         }
