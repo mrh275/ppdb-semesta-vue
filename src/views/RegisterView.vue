@@ -8,7 +8,7 @@ import BuktiPendaftaran from "../components/forms/register/BuktiPendaftaran.vue"
 export default {
   name: "RegisterView",
   beforeMount() {
-    document.title = "Daftar | PPDB SMAN 1 Rawamerta";
+    document.title = "Daftar | PPDB SMK Ar-Raihan Cikampek";
   },
   mounted() {
     const url = window.location.pathname;

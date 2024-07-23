@@ -20,6 +20,9 @@ export default {
   components: {
     DataTable,
   },
+  beforeMount() {
+    document.title = "Data Pendaftar | PPDB SMK Ar-Raihan Cikampek";
+  },
   data() {
     return {
       siswa: [],

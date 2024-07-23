@@ -57,9 +57,6 @@ export default {
   beforeMount() {
     this.fetchData();
   },
-  mounted() {
-    document.title = "Data Pendaftar | PPDB SMAN 1 Rawamerta";
-  },
 };
 </script>
 
