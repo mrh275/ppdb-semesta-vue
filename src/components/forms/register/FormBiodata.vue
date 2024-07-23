@@ -18,6 +18,7 @@ export default {
         tanggal_lahir: "",
         tahun_lulus: "",
         kelas: "",
+        asal_sekolah: "",
         gelombang: "",
         alamat: "",
         dusun: "",
@@ -28,7 +29,6 @@ export default {
         kabupaten: "",
         provinsi: "",
         kode_pos: "",
-        asal_sekolah: "",
       },
     };
   },
@@ -50,6 +50,7 @@ export default {
         cancelButtonText: "Belum",
       }).then((result) => {
         if (result.value) {
+          console.log(this.biodata);
           this.submitBiodata().then(() => {
             Swal.fire({
               title: "Sedang menyimpan data...",
@@ -64,27 +65,29 @@ export default {
                 position: "top-end",
                 showConfirmButton: false,
                 showCloseButton: true,
-                timer: 3000,
+                timer: 1000,
                 timerProgressBar: true,
               });
               Toast.fire({
                 icon: "success",
                 title: "Data berhasil disimpan!",
+              }).then(() => {
+                window.location.reload();
               });
-              this.$emit("nextForm", {
-                status: "",
-                isComplete: "completed",
-                isBackWard: "current-item",
-              });
-              document
-                .querySelector(".form-biodata-wrapper")
-                .classList.add("completed");
-              document
-                .querySelector(".form-orang-tua-wrapper")
-                .classList.add("show");
-              document
-                .querySelector(".form-wrapper-responsive")
-                .classList.add("orang-tua");
+              // this.$emit("nextForm", {
+              //   status: "",
+              //   isComplete: "completed",
+              //   isBackWard: "current-item",
+              // });
+              // document
+              //   .querySelector(".form-biodata-wrapper")
+              //   .classList.add("completed");
+              // document
+              //   .querySelector(".form-orang-tua-wrapper")
+              //   .classList.add("show");
+              // document
+              //   .querySelector(".form-wrapper-responsive")
+              //   .classList.add("orang-tua");
             });
           });
         }

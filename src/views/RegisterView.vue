@@ -79,6 +79,7 @@ export default {
       isOrangTuaCompleted: "",
       isPeriodikCompleted: "",
       isUploadDocumentsCompleted: "",
+      registerStatus: false,
     };
   },
   methods: {
@@ -100,6 +101,7 @@ export default {
     registrationStatus({ status, isComplete, isBackWard }) {
       this.statusUploadDocuments = status;
       this.isUploadDocumentsCompleted = isComplete;
+      this.registerStatus = true;
     },
     jumpToDataDiri() {
       this.changeStatusBiodata({
@@ -381,7 +383,7 @@ export default {
             @finishRegistration="registrationStatus"
             :isCompleted="isUploadDocumentsCompleted"
           />
-          <BuktiPendaftaran />
+          <BuktiPendaftaran :registrationStatus="registerStatus" />
         </div>
       </div>
     </div>

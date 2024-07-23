@@ -221,24 +221,26 @@ export default {
               icon: "success",
               title: "Pendaftaran berhasil!",
               text: "Silahkan lakukan verifikasi pendaftaran pada meja Verifikator.",
+            }).then((dismiss) => {
+              window.location.reload();
             });
             this.$emit("finishRegistration", {
               status: "",
               isComplete: "completed",
               isBackWard: "current-item",
             });
-            document
-              .querySelector(".form-kesejahteraan-wrapper")
-              .classList.remove("show");
-            document
-              .querySelector(".cetak-pendaftaran-wrapper")
-              .classList.add("show");
-            document
-              .querySelector(".form-wrapper-responsive")
-              .classList.remove("kesejahteraan");
-            document
-              .querySelector(".form-wrapper-responsive")
-              .classList.add("cetak-bukti");
+            // document
+            //   .querySelector(".form-kesejahteraan-wrapper")
+            //   .classList.remove("show");
+            // document
+            //   .querySelector(".cetak-pendaftaran-wrapper")
+            //   .classList.add("show");
+            // document
+            //   .querySelector(".form-wrapper-responsive")
+            //   .classList.remove("kesejahteraan");
+            // document
+            //   .querySelector(".form-wrapper-responsive")
+            //   .classList.add("cetak-bukti");
           });
         }
       });

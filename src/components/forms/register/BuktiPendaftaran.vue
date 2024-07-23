@@ -36,11 +36,24 @@ export default {
       print_date: "",
     };
   },
-  beforeMount() {
+  mounted() {
     this.getDataRegister();
   },
   computed: {
     ...mapState(useRegisterStore, ["currentBiodata", "currentAsalSekolah"]),
+  },
+  watch: {
+    registrationStatus(value) {
+      if (value == true) {
+        this.getDataRegister();
+      }
+    },
+  },
+  props: {
+    registrationStatus: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     ...mapActions(useRegisterStore, ["getCurrentBiodata", "resetRegister"]),

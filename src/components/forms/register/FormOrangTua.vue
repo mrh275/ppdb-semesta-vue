@@ -45,6 +45,8 @@ export default {
         cancelButtonText: "Belum",
       }).then((result) => {
         if (result.value) {
+          this.dataOrangTua.noreg_ppdb = sessionStorage.noRegister;
+          console.log(this.dataOrangTua);
           this.submitDataOrangTua().then(() => {
             Swal.fire({
               title: "Sedang menyimpan data...",

@@ -22,6 +22,9 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/cek-pendaftar"> Cek Pendaftar </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" id="menu-terms" href="/#terms"> Persyaratan </a>
         </li>
         <li class="nav-item">
@@ -95,7 +98,8 @@ export default {
     if (
       window.location.pathname == "/data-pendaftar" ||
       window.location.pathname == "/register" ||
-      window.location.pathname == "/contact"
+      window.location.pathname == "/contact" ||
+      window.location.pathname == "/cek-pendaftar"
     ) {
       this.sectionPage = "not-home";
     } else {

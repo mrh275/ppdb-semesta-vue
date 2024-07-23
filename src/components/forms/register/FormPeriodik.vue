@@ -61,6 +61,7 @@ export default {
         cancelButtonText: "Belum",
       }).then((result) => {
         if (result.value) {
+          this.dataPeriodik.noreg_ppdb = sessionStorage.noRegister;
           console.log(this.dataPeriodik);
           this.submitDataPeriodik();
           Swal.fire({
