@@ -3,6 +3,7 @@ import { mapActions, mapState } from "pinia";
 import Swal from "sweetalert2";
 import useRegisterStore from "../../../stores/register";
 import Calendarify from "calendarify";
+import axios from "axios";
 
 export default {
   name: "FormBiodata",
@@ -113,6 +114,33 @@ export default {
         console.log(error);
       }
     },
+    async cekNISN() {
+      const url =
+        "https://disdik.muhamadramdani.my.id/api/siswa/" + this.biodata.nisn;
+      await axios
+        .get(url, {
+          headers: {
+            Accept: "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    },
+    async cekNIK() {
+      const url =
+        "https://dukcapil.muhamadramdani.my.id/api/ambil-data-penduduk/" +
+        this.biodata.nik;
+      await axios
+        .get(url, {
+          headers: {
+            Accept: "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    },
   },
   props: {
     isCompleted: {
@@ -139,12 +167,15 @@ export default {
           <div class="form-group">
             <label for="nisn">Nomor Induk Siswa Nasional (NISN)</label>
             <input
-              type="number"
+              type="text"
               class="form-control"
               id="nisn"
               v-model="biodata.nisn"
               name="nisn"
             />
+            <button class="btn btn-primary" @click.prevent="cekNISN">
+              Cek
+            </button>
             <div class="invalid-feedback">
               <span class="nisn tooltiptext"></span>
             </div>
@@ -152,12 +183,13 @@ export default {
           <div class="form-group">
             <label for="nik">Nomor Induk Kependudukan (NIK)</label>
             <input
-              type="number"
+              type="text"
               class="form-control"
               v-model="biodata.nik"
               id="nik"
               name="nik"
             />
+            <button class="btn btn-primary" @click.prevent="cekNIK">Cek</button>
           </div>
           <div class="form-group">
             <label for="nama">Nama Lengkap</label>
