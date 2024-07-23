@@ -9,14 +9,21 @@ export default {
   name: "FormUploadDocument",
   data() {
     return {
-      dropzoneUrl: axios.defaults.baseURL + "upload-files/ijazah",
+      noRegister: sessionStorage.getItem("noRegister"),
+      urlIjazah: axios.defaults.baseURL + "upload-files/ijazah",
+      urlKk: axios.defaults.baseURL + "upload-files/kk",
+      urlAkte: axios.defaults.baseURL + "upload-files/akte",
+      urlKtp: axios.defaults.baseURL + "upload-files/ktp",
+      urlKip: axios.defaults.baseURL + "upload-files/kip",
+      urlKis: axios.defaults.baseURL + "upload-files/kis",
+      urlKks: axios.defaults.baseURL + "upload-files/kks",
+      urlPkh: axios.defaults.baseURL + "upload-files/pkh",
     };
   },
   mounted() {
-    this.ijazahUpload();
-
+    // Upload ijazah
     const ijazahUpload = new Dropzone("#ijazah-upload", {
-      url: this.dropzoneUrl,
+      url: this.urlIjazah,
       headers: {
         Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
       },
@@ -34,32 +41,163 @@ export default {
       dictInvalidFileType:
         "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
     });
-    ijazahUpload.on("addedfile", (file) => {
-      console.log(file);
+    // End Upload ijazah
+
+    // Upload kk
+    const kkUpload = new Dropzone("#kk-upload", {
+      url: this.urlKk,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      },
+      acceptedFiles: ".jpg, .jpeg, .png",
+      maxFilesize: 1,
+      paramName: "kkFile",
+      thumbnailWidth: 180,
+      thumbnailHeight: 180,
+      addRemoveLinks: true,
+      dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
+      dictCancelUpload: "",
+      previewTemplate: document.querySelector("div#dropzoneItemTemplate")
+        .innerHTML,
+      dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
+      dictInvalidFileType:
+        "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
     });
+    // End Upload kk
+
+    // Upload akte
+    const akteUpload = new Dropzone("#akte-upload", {
+      url: this.urlAkte,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      },
+      acceptedFiles: ".jpg, .jpeg, .png",
+      maxFilesize: 1,
+      paramName: "akteFile",
+      thumbnailWidth: 180,
+      thumbnailHeight: 180,
+      addRemoveLinks: true,
+      dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
+      dictCancelUpload: "",
+      previewTemplate: document.querySelector("div#dropzoneItemTemplate")
+        .innerHTML,
+      dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
+      dictInvalidFileType:
+        "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
+    });
+    // End Upload akte
+
+    // Upload ktp
+    const ktpUpload = new Dropzone("#ktp-upload", {
+      url: this.urlKtp,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      },
+      acceptedFiles: ".jpg, .jpeg, .png",
+      maxFilesize: 1,
+      paramName: "ktpFile",
+      thumbnailWidth: 180,
+      thumbnailHeight: 180,
+      addRemoveLinks: true,
+      dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
+      dictCancelUpload: "",
+      previewTemplate: document.querySelector("div#dropzoneItemTemplate")
+        .innerHTML,
+      dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
+      dictInvalidFileType:
+        "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
+    });
+    // End Upload ktp
+
+    // Upload kip
+    const kipUpload = new Dropzone("#kip-upload", {
+      url: this.urlKip,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      },
+      acceptedFiles: ".jpg, .jpeg, .png",
+      maxFilesize: 1,
+      paramName: "kipFile",
+      thumbnailWidth: 180,
+      thumbnailHeight: 180,
+      addRemoveLinks: true,
+      dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
+      dictCancelUpload: "",
+      previewTemplate: document.querySelector("div#dropzoneItemTemplate")
+        .innerHTML,
+      dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
+      dictInvalidFileType:
+        "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
+    });
+    // End Upload kip
+
+    // Upload kis
+    const kisUpload = new Dropzone("#kis-upload", {
+      url: this.urlKis,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      },
+      acceptedFiles: ".jpg, .jpeg, .png",
+      maxFilesize: 1,
+      paramName: "kisFile",
+      thumbnailWidth: 180,
+      thumbnailHeight: 180,
+      addRemoveLinks: true,
+      dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
+      dictCancelUpload: "",
+      previewTemplate: document.querySelector("div#dropzoneItemTemplate")
+        .innerHTML,
+      dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
+      dictInvalidFileType:
+        "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
+    });
+    // End Upload kis
+
+    // Upload kks/kps
+    const kksUpload = new Dropzone("#kks-upload", {
+      url: this.urlKks,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      },
+      acceptedFiles: ".jpg, .jpeg, .png",
+      maxFilesize: 1,
+      paramName: "kksFile",
+      thumbnailWidth: 180,
+      thumbnailHeight: 180,
+      addRemoveLinks: true,
+      dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
+      dictCancelUpload: "",
+      previewTemplate: document.querySelector("div#dropzoneItemTemplate")
+        .innerHTML,
+      dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
+      dictInvalidFileType:
+        "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
+    });
+    // End Upload kks/kps
+
+    // Upload pkh
+    const pkhUpload = new Dropzone("#pkh-upload", {
+      url: this.urlPkh,
+      headers: {
+        Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      },
+      acceptedFiles: ".jpg, .jpeg, .png",
+      maxFilesize: 1,
+      paramName: "pkhFile",
+      thumbnailWidth: 180,
+      thumbnailHeight: 180,
+      addRemoveLinks: true,
+      dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
+      dictCancelUpload: "",
+      previewTemplate: document.querySelector("div#dropzoneItemTemplate")
+        .innerHTML,
+      dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
+      dictInvalidFileType:
+        "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
+    });
+    // End Upload pkh
   },
   methods: {
-    ijazahUpload() {
-      Dropzone.options.ijazahUpload = {
-        url: this.dropzoneUrl,
-        method: "post",
-        withCredentials: true,
-        acceptedFiles: ".jpg, .jpeg, .png",
-        maxFilesize: 1,
-        paramName: "ijazahFile",
-        thumbnailWidth: 180,
-        thumbnailHeight: 180,
-        addRemoveLinks: true,
-        dictRemoveFile: '<span class="tooltiptext ">Hapus</span>',
-        dictCancelUpload: "",
-        previewTemplate: document.querySelector("div#dropzoneItemTemplate")
-          .innerHTML,
-        dictFileTooBig: "Ukuran file terlalu besar! Maksimal 1024KB",
-        dictInvalidFileType:
-          "Tipe file tidak sesuai. Hanya file .jpg, .jpeg, .png yang diperbolehkan",
-        thumbnailMethod: "contain",
-      };
-    },
     submitDocuments() {
       Swal.fire({
         title: "Apa anda sudah yakin?",
@@ -151,7 +289,7 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="ijazah-upload"
             >
-              <input type="hidden" name="noreg_ppdb" />
+              <input type="hidden" name="noreg_ppdb" v-model="noRegister" />
               <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
@@ -183,7 +321,7 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="kk-upload"
             >
-              <input type="hidden" name="noreg-ppdb" />
+              <input type="hidden" name="noreg_ppdb" v-model="noRegister" />
               <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
@@ -215,7 +353,7 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="akte-upload"
             >
-              <input type="hidden" name="noreg-ppdb" />
+              <input type="hidden" name="noreg_ppdb" v-model="noRegister" />
               <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
@@ -247,7 +385,7 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="ktp-upload"
             >
-              <input type="hidden" name="noreg-ppdb" />
+              <input type="hidden" name="noreg_ppdb" v-model="noRegister" />
               <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
@@ -281,7 +419,7 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="kip-upload"
             >
-              <input type="hidden" name="noreg-ppdb" />
+              <input type="hidden" name="noreg_ppdb" v-model="noRegister" />
               <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
@@ -313,7 +451,7 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="kis-upload"
             >
-              <input type="hidden" name="noreg-ppdb" />
+              <input type="hidden" name="noreg_ppdb" v-model="noRegister" />
               <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
@@ -345,7 +483,7 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="kks-upload"
             >
-              <input type="hidden" name="noreg-ppdb" />
+              <input type="hidden" name="noreg_ppdb" v-model="noRegister" />
               <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
@@ -377,7 +515,7 @@ export default {
               class="dropzone w-[13rem] h-[15rem] flex items-center justify-center rounded-lg border-[#0099ff]"
               id="pkh-upload"
             >
-              <input type="hidden" name="noreg-ppdb" />
+              <input type="hidden" name="noreg_ppdb" v-model="noRegister" />
               <div class="flex flex-col items-center justify-center dz-message">
                 <div class="mb-4">
                   <div class="text-center">
