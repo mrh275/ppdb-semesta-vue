@@ -22,7 +22,13 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/cek-pendaftar"> Cek Pendaftar </a>
+          <a
+            class="nav-link"
+            href="javascript:void(0)"
+            @click.prevent="checkUserLoginPendaftar"
+          >
+            Cek Pendaftar
+          </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="menu-terms" href="/#terms"> Persyaratan </a>
@@ -120,6 +126,14 @@ export default {
       document.querySelector("#login-form").classList.remove("invisible");
       document.querySelector("#login-form").classList.remove("opacity-0");
     },
+    showCekPendaftar() {
+      document
+        .querySelector("#cek-pendaftar-form")
+        .classList.remove("invisible");
+      document
+        .querySelector("#cek-pendaftar-form")
+        .classList.remove("opacity-0");
+    },
     toggleDarkMode() {
       document.body.classList.toggle("dark");
     },
@@ -130,6 +144,23 @@ export default {
     checkUser() {
       if (this.userStore.userLoggedIn) {
         window.location.href = "/register";
+      } else {
+        Swal.fire({
+          icon: "warning",
+          title: "Oops... <br> Anda belum login!",
+          text: "Silahkan login terlebih dahulu.",
+          confirmButtonText: "Tutup",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+        });
+      }
+    },
+
+    // Check user login for cek pendaftar
+    checkUserLoginPendaftar() {
+      if (this.userStore.userLoggedIn) {
+        this.showCekPendaftar();
       } else {
         Swal.fire({
           icon: "warning",
