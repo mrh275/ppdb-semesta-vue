@@ -2,6 +2,7 @@
 import { mapActions, mapState } from "pinia";
 import Swal from "sweetalert2";
 import useRegisterStore from "../../../stores/register";
+import Calendarify from "calendarify";
 
 export default {
   name: "FormBiodata",
@@ -15,10 +16,9 @@ export default {
         jenis_kelamin: "",
         tempat_lahir: "",
         tanggal_lahir: "",
-        asal_sekolah: "",
         tahun_lulus: "",
         kelas: "",
-        jalur_pendaftaran: "",
+        gelombang: "",
         alamat: "",
         dusun: "",
         rt: "",
@@ -28,11 +28,12 @@ export default {
         kabupaten: "",
         provinsi: "",
         kode_pos: "",
+        asal_sekolah: "",
       },
     };
   },
   computed: {
-    ...mapState(useRegisterStore, ["currentBiodata"]),
+    ...mapState(useRegisterStore, ["currentBiodata", "currentAsalSekolah"]),
   },
   beforeMount() {
     this.getBiodata();
@@ -116,6 +117,13 @@ export default {
       required: false,
     },
   },
+  mounted() {
+    const calendarify = new Calendarify(".date-input", {
+      isDark: true,
+      zIndex: 9999,
+    });
+    calendarify.init(); // Initialize calendarify
+  },
 };
 </script>
 
@@ -197,8 +205,8 @@ export default {
               type="text"
               class="form-control"
               id="asal_sekolah"
-              v-model="biodata.asal_sekolah"
               name="asal_sekolah"
+              v-model="biodata.asal_sekolah"
             />
           </div>
           <div class="form-group">
@@ -239,21 +247,17 @@ export default {
         </div>
         <div class="form-section-right">
           <div class="form-group">
-            <label for="jalur_pendaftaran">Jalur Pendaftaran</label>
+            <label for="jalur_pendaftaran">Gelombang</label>
             <select
-              name="jalur_pendaftaran"
+              name="gelombang"
               id="jalur_pendaftaran"
               class="form-select"
-              v-model="biodata.jalur_pendaftaran"
+              v-model="biodata.gelombang"
             >
               <option value="">Pilih :</option>
-              <option value="1">KETM</option>
-              <option value="2">Disabilitas</option>
-              <option value="3">Kondisi Tertentu</option>
-              <option value="4">Prestasi Rapor</option>
-              <option value="5">Prestasi Kejuaraan</option>
-              <option value="6">Perpindahan Orang Tua/Anak Guru</option>
-              <option value="7">Zonasi</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
             </select>
           </div>
           <div class="form-group">
