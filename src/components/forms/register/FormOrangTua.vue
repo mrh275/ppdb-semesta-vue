@@ -12,14 +12,14 @@ export default {
         noreg_ppdb: sessionStorage.noRegister ? sessionStorage.noRegister : "",
         nama_ayah: "",
         tempat_lahir_ayah: "",
-        tanggal_lahir_ayah: "",
+        tahun_lahir_ayah: "",
         pendidikan_ayah: "",
         pekerjaan_ayah: "",
         penghasilan_ayah: "",
         alamat_ayah: "",
         nama_ibu: "",
         tempat_lahir_ibu: "",
-        tanggal_lahir_ibu: "",
+        tahun_lahir_ibu: "",
         pendidikan_ibu: "",
         pekerjaan_ibu: "",
         penghasilan_ibu: "",
@@ -166,13 +166,13 @@ export default {
             />
           </div>
           <div class="form-group">
-            <label for="tanggal_lahir_ayah">Tanggal Lahir Ayah</label>
+            <label for="tanggal_lahir_ayah">Tahun Lahir Ayah</label>
             <input
               type="text"
               class="form-control"
               id="tanggal_lahir_ayah"
-              name="tanggal_lahir_ayah"
-              v-model="dataOrangTua.tanggal_lahir_ayah"
+              name="tahun_lahir_ayah"
+              v-model="dataOrangTua.tahun_lahir_ayah"
             />
           </div>
           <div class="form-group">
@@ -272,13 +272,13 @@ export default {
             />
           </div>
           <div class="form-group">
-            <label for="tanggal_lahir_ibu">Tanggal Lahir Ibu</label>
+            <label for="tanggal_lahir_ibu">Tahun Lahir Ibu</label>
             <input
               type="text"
               class="form-control"
               id="tanggal_lahir_ibu"
-              name="tanggal_lahir_ibu"
-              v-model="dataOrangTua.tanggal_lahir_ibu"
+              name="tahun_lahir_ibu"
+              v-model="dataOrangTua.tahun_lahir_ibu"
             />
           </div>
           <div class="form-group">
