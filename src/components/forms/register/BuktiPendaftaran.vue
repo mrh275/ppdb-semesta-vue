@@ -3,6 +3,8 @@ import logoArraihan from "../../../assets/img/Logo-SMK-Ar-Raihan-S.png";
 import ttd from "../../../assets/img/ttd.png";
 import useRegisterStore from "@/stores/register";
 import { mapState, mapActions } from "pinia";
+import Swal from "sweetalert2";
+import html2pdf from "html2pdf.js";
 
 export default {
   name: "BuktiPendaftaran",
@@ -82,6 +84,40 @@ export default {
       await this.resetRegister();
       this.$router.push("/");
     },
+    cetakBukti() {
+      let element = document.getElementById("cetak-bukti-pendaftaran");
+      document.documentElement.scrollTop = 0;
+      Swal.fire({
+        title: "Cetak Bukti Pendaftaran",
+        text: "Apakah anda yakin ingin mencetak bukti pendaftaran ini?",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya, cetak!",
+      }).then((result) => {
+        if (result.value) {
+          let option = {
+            margin: [0, 0, 0, 0],
+            filename: "bukti-pendaftaran-ppdb-2-2223001.pdf",
+            image: {
+              type: "jpeg",
+              quality: 1,
+            },
+            html2canvas: {
+              scale: 2,
+            },
+            jsPDF: {
+              unit: "in",
+              format: "A4",
+              orientation: "portrait",
+            },
+          };
+
+          html2pdf().set(option).from(element).save();
+        }
+      });
+    },
   },
 };
 </script>
@@ -92,7 +128,7 @@ export default {
   >
     <h3 class="cetak-pendaftaran-title">Bukti Pendaftaran PPDB</h3>
 
-    <button class="btn btn-primary" type="button" onclick="cetakBukti()">
+    <button class="btn btn-primary" type="button" @click.prevent="cetakBukti">
       Cetak Bukti Pendaftaran
     </button>
     <button
