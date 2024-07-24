@@ -23,7 +23,8 @@ export default defineStore('register', {
                         Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
                     },
                 }).then((response) => {
-                    if (!sessionStorage.getItem("noRegister")) {
+                    console.log(response.data);
+                    if (!sessionStorage.getItem("noRegister") || sessionStorage.getItem("noRegister") == null || sessionStorage.getItem("noRegister") == "" || sessionStorage.getItem("noRegister") == undefined) {
                         sessionStorage.setItem("noRegister", response.data.noreg_ppdb);
                     }
                     sessionStorage.setItem("currentStatusRegister", "orangtua");

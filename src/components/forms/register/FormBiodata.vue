@@ -230,8 +230,8 @@ export default {
               type="text"
               class="form-control date-input"
               id="tanggal_lahir"
-              v-model="biodata.tanggal_lahir"
               name="tanggal_lahir"
+              v-model="biodata.tanggal_lahir"
             />
           </div>
           <div class="form-group">

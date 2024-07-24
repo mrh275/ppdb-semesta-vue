@@ -151,7 +151,7 @@ export default {
     >
       Tutup Halaman
     </button>
-    <div class="card-bukti-pendaftaran my-4 px-[11rem] 2xl:px-[28rem]">
+    <div class="card-bukti-pendaftaran my-4 px-[11rem] 2xl:px-[12rem]">
       <div
         class="w-full mx-auto bg-white rounded-lg card-body"
         id="cetak-bukti-pendaftaran"
