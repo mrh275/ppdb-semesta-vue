@@ -56,6 +56,7 @@ export default defineStore('register', {
                         Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
                     },
                 }).then((response) => {
+                    console.log(response.data);
                     sessionStorage.setItem("currentStatusRegister", "upload-files");
                     this.storedDataPeriodik = response.data;
                 });

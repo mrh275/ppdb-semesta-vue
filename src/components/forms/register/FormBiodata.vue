@@ -2,7 +2,6 @@
 import { mapActions, mapState } from "pinia";
 import Swal from "sweetalert2";
 import useRegisterStore from "../../../stores/register";
-import Calendarify from "calendarify";
 import axios from "axios";
 
 export default {
@@ -148,13 +147,6 @@ export default {
       required: false,
     },
   },
-  mounted() {
-    const calendarify = new Calendarify(".date-input", {
-      isDark: true,
-      zIndex: 9999,
-    });
-    calendarify.init(); // Initialize calendarify
-  },
 };
 </script>
 
@@ -228,7 +220,7 @@ export default {
             <label for="tanggal_lahir">Tanggal Lahir</label>
             <input
               type="text"
-              class="form-control date-input"
+              class="form-control"
               id="tanggal_lahir"
               name="tanggal_lahir"
               v-model="biodata.tanggal_lahir"
